@@ -1,0 +1,406 @@
+<title>Palabra para tu momento</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: fondo de luz de amanecer en movimiento lento; todo el contenido flota en paneles de vidrio líquido. Barra superior fija, portada con titular serif, mosaico de situaciones, resultados en rejilla de dos columnas. */
+:root{
+  --bg:#EEF1F7;
+  --ink:#0F1729; --ink-2:#47526A; --ink-3:#7B859B;
+  --glass:rgba(255,255,255,.52); --glass-strong:rgba(255,255,255,.72);
+  --edge:rgba(255,255,255,.85); --edge-2:rgba(15,23,41,.08);
+  --shadow:0 1px 1px rgba(15,23,41,.04), 0 10px 30px -10px rgba(30,42,80,.18);
+  --btn:#0F1729; --btn-ink:#FFFFFF;
+  --gold:#B07A2A;
+  --orb-1:#9CC3FF; --orb-2:#FFC9A8; --orb-3:#F4E2A1; --orb-4:#C9B8FF;
+  --f-display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --f-ui:"Plus Jakarta Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#070A12; --ink:#F2F4FA; --ink-2:#B4BCCF; --ink-3:#7F889D;
+  --glass:rgba(22,28,44,.48); --glass-strong:rgba(28,35,54,.7);
+  --edge:rgba(255,255,255,.14); --edge-2:rgba(255,255,255,.06);
+  --shadow:0 1px 1px rgba(0,0,0,.3), 0 14px 40px -12px rgba(0,0,0,.6);
+  --btn:#F2F4FA; --btn-ink:#0B0F1A; --gold:#E3B868;
+  --orb-1:#2A4E9A; --orb-2:#7A3D3A; --orb-3:#6A5521; --orb-4:#43337E; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#070A12; --ink:#F2F4FA; --ink-2:#B4BCCF; --ink-3:#7F889D;
+  --glass:rgba(22,28,44,.48); --glass-strong:rgba(28,35,54,.7);
+  --edge:rgba(255,255,255,.14); --edge-2:rgba(255,255,255,.06);
+  --shadow:0 1px 1px rgba(0,0,0,.3), 0 14px 40px -12px rgba(0,0,0,.6);
+  --btn:#F2F4FA; --btn-ink:#0B0F1A; --gold:#E3B868;
+  --orb-1:#2A4E9A; --orb-2:#7A3D3A; --orb-3:#6A5521; --orb-4:#43337E; color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-ui);font-size:15.5px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
+
+/* Fondo de luz */
+.sky{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75}
+.o1{width:52vw;height:52vw;left:-12vw;top:-14vw;background:var(--orb-1);animation:drift1 28s ease-in-out infinite alternate}
+.o2{width:46vw;height:46vw;right:-14vw;top:8vh;background:var(--orb-2);animation:drift2 32s ease-in-out infinite alternate}
+.o3{width:40vw;height:40vw;left:22vw;top:58vh;background:var(--orb-3);animation:drift1 36s ease-in-out infinite alternate-reverse}
+.o4{width:34vw;height:34vw;right:4vw;bottom:-10vw;background:var(--orb-4);animation:drift2 30s ease-in-out infinite alternate-reverse}
+@keyframes drift1{to{transform:translate(6vw,4vh) scale(1.08)}}
+@keyframes drift2{to{transform:translate(-5vw,6vh) scale(.94)}}
+.grain{position:absolute;inset:0;opacity:.05;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+
+/* Vidrio líquido */
+.glass{position:relative;background:var(--glass);backdrop-filter:blur(22px) saturate(170%);-webkit-backdrop-filter:blur(22px) saturate(170%);border:1px solid var(--edge);box-shadow:var(--shadow), inset 0 1px 0 var(--edge), inset 0 -1px 0 var(--edge-2)}
+.glass::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(155deg,rgba(255,255,255,.38) 0%,rgba(255,255,255,0) 38%,rgba(255,255,255,0) 70%,rgba(255,255,255,.12) 100%);mix-blend-mode:soft-light}
+
+/* Barra superior */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;padding-top:12px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.bar-in{max-width:1080px;margin:0 auto;border-radius:18px;padding:10px 10px 10px 16px;display:flex;align-items:center;gap:14px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:14px;letter-spacing:-.01em;white-space:nowrap}
+.mark{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:var(--btn);color:var(--btn-ink)}
+.mark svg{width:15px;height:15px}
+.brand small{display:block;font-weight:500;color:var(--ink-3);font-size:11.5px;letter-spacing:0}
+.search-wrap{flex:1;min-width:0;display:flex;justify-content:flex-end}
+.search{width:100%;max-width:340px;min-width:0;border:1px solid var(--edge-2);background:var(--glass-strong);color:var(--ink);border-radius:12px;padding:10px 14px 10px 36px;font:inherit;font-size:14px;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237B859B' stroke-width='2'><circle cx='11' cy='11' r='7'/><path d='m20 20-3.5-3.5'/></svg>");background-repeat:no-repeat;background-position:12px center;background-size:16px}
+.search::placeholder{color:var(--ink-3)}
+@media (max-width:560px){.brand small{display:none}.brand .bt{display:none}}
+
+.wrap{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding-block:40px 72px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:44px}
+
+/* Portada */
+.hero{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:28px;align-items:end}
+@media (max-width:820px){.hero{grid-template-columns:minmax(0,1fr)}}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
+.eyebrow i{width:6px;height:6px;border-radius:50%;background:var(--gold);display:block}
+h1{font-family:var(--f-display);font-weight:400;font-size:clamp(46px,8.4vw,96px);line-height:.95;letter-spacing:-.02em;margin:14px 0 18px;text-wrap:balance}
+h1 em{font-style:italic;color:var(--ink-2)}
+.lede{margin:0;color:var(--ink-2);font-size:17px;max-width:46ch}
+.vcard{border-radius:24px;padding:24px 24px 22px;display:flex;flex-direction:column;gap:14px}
+.vcard q{font-family:var(--f-display);font-size:clamp(22px,2.6vw,27px);line-height:1.25;quotes:none}
+.ref{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+.stats{display:flex;gap:22px;padding-top:4px;border-top:1px solid var(--edge-2);margin-top:4px;padding-top:14px;font-variant-numeric:tabular-nums}
+.stats b{display:block;font-size:20px;font-weight:700;letter-spacing:-.02em}
+.stats span{font-size:12px;color:var(--ink-3)}
+
+/* Situaciones */
+.head-row{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap}
+h2{font-family:var(--f-display);font-weight:400;font-size:clamp(32px,4.4vw,44px);line-height:1.02;letter-spacing:-.015em;margin:0;text-wrap:balance}
+.sub{color:var(--ink-3);font-size:14px;margin:6px 0 0}
+.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:20px}
+@media (max-width:820px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:420px){.tiles{gap:9px}}
+.tile{appearance:none;font:inherit;color:var(--ink);text-align:left;cursor:pointer;border-radius:20px;padding:16px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:center;transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s}
+.tile:hover{transform:translateY(-2px)}
+.tile .ic{width:40px;height:40px;border-radius:13px;display:grid;place-items:center;background:var(--glass-strong);border:1px solid var(--edge)}
+.tile .ic svg{width:20px;height:20px}
+.tile b{display:block;font-size:15px;font-weight:600;line-height:1.25;letter-spacing:-.01em}
+.tile span{display:block;font-size:12.5px;color:var(--ink-3);margin-top:2px}
+.tile[aria-pressed="true"]{background:var(--btn);color:var(--btn-ink);border-color:transparent}
+.tile[aria-pressed="true"] span{color:inherit;opacity:.7}
+.tile[aria-pressed="true"] .ic{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.2)}
+@media (max-width:420px){.tile{grid-template-columns:minmax(0,1fr);padding:14px}}
+
+/* Filtros */
+.seg{display:inline-flex;flex-wrap:wrap;max-width:100%;padding:4px;border-radius:14px;gap:2px}
+.seg button{appearance:none;border:0;background:transparent;color:var(--ink-2);font:inherit;font-size:13.5px;font-weight:600;padding:8px 14px;border-radius:10px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--btn);color:var(--btn-ink)}
+
+/* Resultados */
+.cat{display:flex;flex-direction:column;gap:18px;scroll-margin-top:96px}
+.cat-head{border-radius:24px;padding:22px 24px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:20px;align-items:center}
+@media (max-width:720px){.cat-head{grid-template-columns:minmax(0,1fr)}}
+.cat-head h2{font-size:clamp(28px,3.6vw,38px)}
+.cat-head .n{font-size:13px;color:var(--ink-3);margin-top:6px}
+.cat-head q{font-family:var(--f-display);font-style:italic;font-size:19px;line-height:1.35;quotes:none;color:var(--ink-2)}
+.cat-head .ref{display:block;margin-top:8px;font-style:normal}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:720px){.grid{grid-template-columns:minmax(0,1fr)}}
+.item{border-radius:20px;padding:18px 18px 16px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:12px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.pill{padding:3px 9px;border-radius:999px;font-weight:600;font-size:11.5px;background:var(--glass-strong);border:1px solid var(--edge);color:var(--ink-2)}
+.pill.t{color:var(--gold)}
+.pill.f{background:var(--btn);color:var(--btn-ink);border-color:transparent}
+.dot{width:3px;height:3px;border-radius:50%;background:var(--ink-3)}
+.item h3{margin:0;font-size:17px;font-weight:600;line-height:1.3;letter-spacing:-.012em}
+.item p{margin:0;font-size:14px;color:var(--ink-2)}
+.who{font-size:12.5px;color:var(--ink-3)}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:4px}
+.btn{display:inline-flex;align-items:center;gap:7px;border-radius:11px;padding:9px 13px;font-size:13px;font-weight:600;text-decoration:none;border:1px solid var(--edge);color:var(--ink);background:var(--glass-strong);cursor:pointer;font-family:inherit;transition:transform .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn.primary{background:var(--btn);color:var(--btn-ink);border-color:transparent}
+.btn svg{width:15px;height:15px;flex:none}
+.btn.icon{padding:9px}
+.back{align-self:flex-start;border-radius:12px;padding:9px 14px;font:inherit;font-size:13.5px;font-weight:600;color:var(--ink);cursor:pointer}
+.empty{border-radius:20px;padding:26px;color:var(--ink-2)}
+.tile:focus-visible,.btn:focus-visible,.search:focus-visible,.seg button:focus-visible,.back:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+footer{color:var(--ink-3);font-size:13px;border-radius:18px;padding:16px 20px}
+footer a{color:var(--ink);font-weight:600}
+.toast{position:fixed;left:50%;bottom:calc(22px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:40;border-radius:999px;padding:10px 18px;font-size:13.5px;font-weight:600}
+@media (prefers-reduced-motion:reduce){.orb{animation:none}*{transition:none!important}html{scroll-behavior:auto}}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.glass{background:var(--glass-strong)}}
+</style>
+
+<div class="sky" aria-hidden="true"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div><div class="orb o4"></div><div class="grain"></div></div>
+
+<div class="bar">
+  <div class="bar-in glass">
+    <div class="brand"><span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 3v18M5 9h14"/></svg></span><span class="bt">Avivamiento<small>Ministerio de Visitación</small></span></div>
+    <div class="search-wrap"><input id="search" class="search" type="search" placeholder="Buscar: paz, hijos, cáncer…" aria-label="Buscar un mensaje"></div>
+  </div>
+</div>
+
+<div class="wrap">
+  <section class="hero">
+    <div>
+      <span class="eyebrow"><i></i>Centro Mundial de Avivamiento</span>
+      <h1>Palabra para <em>tu momento</em></h1>
+      <p class="lede">Mensajes de nuestros pastores para acompañarte en lo que estás viviendo. Escoge tu situación y escucha la Palabra con calma.</p>
+    </div>
+    <aside class="vcard glass">
+      <q>Cercano está Jehová a los quebrantados de corazón; y salva a los contritos de espíritu.</q>
+      <span class="ref">Salmos 34:18</span>
+      <div class="stats"><div><b id="st-n">89</b><span>mensajes</span></div><div><b>9</b><span>temas</span></div><div><b id="st-s">60</b><span>prédicas completas</span></div></div>
+    </aside>
+  </section>
+
+  <section aria-labelledby="q">
+    <div class="head-row">
+      <div><h2 id="q">¿Por qué estás pasando?</h2><p class="sub">Toca una situación para ver los mensajes de ese tema.</p></div>
+      <div class="seg glass" role="group" aria-label="Filtrar mensajes">
+        <button type="button" id="f-all" data-f="all" aria-pressed="true">Todos</button>
+        <button type="button" id="f-short" data-f="short" aria-pressed="false">Cortos</button>
+        <button type="button" id="f-full" data-f="full" aria-pressed="false">Prédicas completas</button>
+        <button type="button" id="f-test" data-f="test" aria-pressed="false">Testimonios</button>
+      </div>
+    </div>
+    <div class="tiles" id="tiles"></div>
+  </section>
+
+  <main id="results" style="display:flex;flex-direction:column;gap:44px"></main>
+
+  <footer class="glass">Todos los mensajes están publicados en el canal oficial <a href="https://www.youtube.com/@avivamiento" target="_blank" rel="noopener">Avivamiento en YouTube</a>. Si necesitas oración o una visita, comunícate con el Ministerio de Visitación de la iglesia.</footer>
+</div>
+<div class="toast glass" id="toast" hidden></div>
+
+<script>
+const CATS=[
+ {k:"duelo",t:"Perdí a un ser querido",s:"Duelo y consuelo",v:"Le dijo Jesús: Yo soy la resurrección y la vida; el que cree en mí, aunque esté muerto, vivirá.",r:"Juan 11:25"},
+ {k:"enfermedad",t:"Estoy enfermo",s:"Sanidad y testimonios",v:"Bendice, alma mía, a Jehová, y no olvides ninguno de sus beneficios. Él es quien perdona todas tus iniquidades, el que sana todas tus dolencias.",r:"Salmos 103:2-3"},
+ {k:"prueba",t:"Estoy en una prueba",s:"Fe en medio de la crisis",v:"Cuando pases por las aguas, yo estaré contigo; y si por los ríos, no te anegarán. Cuando pases por el fuego, no te quemarás, ni la llama arderá en ti.",r:"Isaías 43:2"},
+ {k:"ansiedad",t:"Tengo ansiedad o temor",s:"Paz para el corazón",v:"Por nada estéis afanosos, sino sean conocidas vuestras peticiones delante de Dios en toda oración y ruego, con acción de gracias. Y la paz de Dios, que sobrepasa todo entendimiento, guardará vuestros corazones y vuestros pensamientos en Cristo Jesús.",r:"Filipenses 4:6-7"},
+ {k:"soledad",t:"Me siento solo",s:"Dios no te abandona",v:"Aunque mi padre y mi madre me dejaran, con todo, Jehová me recogerá.",r:"Salmos 27:10"},
+ {k:"familia",t:"Mi familia necesita ayuda",s:"Hogar, hijos y restauración",v:"Ellos dijeron: Cree en el Señor Jesucristo, y serás salvo, tú y tu casa.",r:"Hechos 16:31"},
+ {k:"perdon",t:"Me cuesta perdonar",s:"Perdón y heridas del alma",v:"Antes sed benignos unos con otros, misericordiosos, perdonándoos unos a otros, como Dios también os perdonó a vosotros en Cristo.",r:"Efesios 4:32"},
+ {k:"esperanza",t:"Necesito esperanza",s:"Fe y promesas de Dios",v:"Por la misericordia de Jehová no hemos sido consumidos, porque nunca decayeron sus misericordias. Nuevas son cada mañana; grande es tu fidelidad.",r:"Lamentaciones 3:22-23"},
+ {k:"salvacion",t:"Quiero volver a Dios",s:"Salvación y nueva vida",v:"Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito, para que todo aquel que en él cree, no se pierda, mas tenga vida eterna.",r:"Juan 3:16"}
+];
+const PP="Pastora Ma. Patricia Rodríguez";
+// [id, título, quién, segundos, año, tipo (T testimonio, P podcast, ''), temas, descripción]
+const V=[
+["vaxVQrOykL8","Sanidad después de una gran pérdida","",186,2026,"T","duelo enfermedad","Roxana perdió a su hijo de 8 años y la tristeza llegó a afectar su salud. Cuenta cómo Dios restauró su cuerpo y su corazón."],
+["zMTlQaXdRsU","No temas, Dios está contigo",PP,304,2024,"","duelo soledad","Mensaje para las viudas, las mujeres abandonadas y las madres solas, desde Isaías 54: Dios es esposo fiel y defensor, y ve cada lágrima."],
+["WhF28bcZN4g","El que cree en Jesús tiene vida eterna","",186,2026,"","duelo salvacion","La promesa de vida eterna para quien cree en Jesús. Un mensaje breve de esperanza frente a la muerte."],
+["e-dD51W0mz4","Adiós al temor a morir: sana del corazón","",216,2026,"T","duelo enfermedad ansiedad","Testimonio de sanidad del corazón y de una persona que dejó atrás el temor a la muerte."],
+["DLR5AyqpJ0Y","Nada nos podrá separar de su amor",PP,175,2024,"","duelo soledad","Sobre la seguridad del amor de Dios, que ninguna circunstancia puede quebrar."],
+["G0nvl_m1Fkc","Tenemos esperanza","",1243,2026,"","duelo esperanza","La esperanza que el creyente tiene en Dios, aun en los momentos más oscuros."],
+["LG0EtK4sVqk","¿Necesitas un milagro?",PP,162,2024,"","enfermedad","La historia de una mujer que perseveró en la fe aunque todos le decían que no, hasta alcanzar su milagro."],
+["-3XbkBJ7RCc","Mentalidad de milagros","",562,2025,"","enfermedad esperanza","Invita a creer que Dios sigue haciendo milagros hoy y a esperar su intervención."],
+["AwsRNtcwzPA","Los milagros de Dios","",241,2014,"","enfermedad","Mensaje corto sobre el poder de Dios para obrar milagros."],
+["3bAlEjPJQ6Y","El examen confirmó el milagro: la leucemia desapareció","",114,2026,"T","enfermedad","Leidy recibió un diagnóstico de leucemia. Ella y su esposo se aferraron a Dios servicio tras servicio."],
+["vRW7ph_xsx0","Tenía cáncer metastásico y Dios la sanó","",177,2026,"T","enfermedad","Neiza siguió creyendo aunque la quimioterapia no funcionó. Cuenta cómo Dios la sostuvo hasta su sanidad."],
+["o7mPvGXT6b4","Dios me sanó de una enfermedad incurable","",286,2026,"T","enfermedad","Testimonio de sanidad de una artritis reumatoide que, según los médicos, no tenía cura."],
+["73hbFFTGens","Cuando Dios cambió el diagnóstico de Judith","",164,2025,"T","enfermedad","Judith tenía siete masas en la tiroides y decidió creerle a Dios."],
+["Xs8kx2Epp9s","Su cirugía no funcionó, pero su fe sí","",159,2026,"T","enfermedad","Yumer vivía con dolor diario después de una fractura y una cirugía que no dio resultado, hasta que Dios lo sanó."],
+["9Nh7c-K5Mds","Sobrevivió a un brutal accidente","",169,2026,"T","enfermedad","David salió despedido 26 metros en un accidente de tránsito. Su historia de recuperación."],
+["buNayCz2Zi4","No podía caminar y hoy corre por un milagro de Dios","",221,2026,"T","enfermedad","Sharoon nació con una enfermedad genética de los huesos y pasó por decenas de cirugías. Hoy cuenta lo que Dios hizo."],
+["mjCs8NghatU","Cuando la fe espera su milagro","",120,2025,"T","enfermedad prueba","Leidy esperó hasta el siguiente servicio confiando en Dios, y fue sanada de cálculos renales."],
+["1JWHmYdzjQw","¿Por qué la prueba?","",826,2026,"","prueba","Responde la pregunta que muchos se hacen en medio del dolor: para qué permite Dios la prueba."],
+["PdCcLLVr-PI","La tormenta no cambiará el plan de Dios","",762,2026,"","prueba esperanza","Las crisis no anulan lo que Dios ha dicho sobre tu vida."],
+["mnAdc__RwDE","En medio del horno de la prueba: Jesús está contigo","",570,2026,"","prueba","A partir del horno de fuego, recuerda que Jesús acompaña a los suyos en la prueba."],
+["WI3lIaOq5qw","Dios está contigo en la prueba","",684,2026,"","prueba soledad","La presencia de Dios no se aparta cuando llegan los días difíciles."],
+["w_sP_h8bUdo","¿Cómo reaccionar en medio de la prueba?","",707,2025,"","prueba","Cómo mantener la fe firme y el corazón confiado en Dios cuando llegan las pruebas."],
+["wzPyzGVAAqc","En medio de la prueba","",762,2025,"","prueba","Ánimo para quien está atravesando un proceso difícil."],
+["i2cqTidWXtA","Manantiales en el desierto","",1045,2025,"","prueba esperanza","Dios hace brotar provisión y consuelo en las temporadas más secas de la vida."],
+["7EkhJG8wLnA","¿Estás en la tormenta?",PP,158,2024,"","prueba","Un mensaje breve para quien siente que la tormenta no termina."],
+["qB5QbSYihJY","En la dificultad",PP,200,2024,"","prueba","En los momentos difíciles, correr a Dios y confiar en Él antes que en el hombre."],
+["WigJ9QarhQI","Tu propósito no elimina tu proceso","Pastora Ana María Pardo",491,2026,"","prueba","Tener un propósito de Dios no evita los procesos; los procesos forman el propósito."],
+["IwwL1EBNCu0","Después de la prueba","",317,2024,"","prueba esperanza","Lo que Dios trae a la vida cuando la prueba termina."],
+["WMwndD0HzE4","De la aflicción al milagro: la fe de Ana",PP,285,2025,"","prueba","Ana transformó su dolor en oración y su oración en milagro."],
+["Q90J6gW8fzI","El propósito de la aflicción","",2774,2015,"","prueba","Cuando la situación parece no tener salida, Dios sigue obrando un plan para bien."],
+["QmMcs2UiEpY","3 consejos para superar la ansiedad",PP,316,2025,"","ansiedad","Tres consejos bíblicos y prácticos para enfrentar la ansiedad."],
+["8BmwCpCAB54","No te afanes, ¡confía en Dios!",PP,185,2024,"","ansiedad","Cambiar el afán por la confianza en el cuidado de Dios."],
+["o8J25Eo3Eug","¿Qué hacer en el día de la angustia?",PP,273,2024,"","ansiedad prueba","Qué hacer cuando llega la angustia y hacia dónde dirigir el corazón."],
+["X1ravjCb6nQ","Necesitamos paz","",353,2024,"","ansiedad","La paz que viene de Dios en medio de la inquietud."],
+["Aet1XGah4jw","Paz al que busque a Dios","",351,2024,"","ansiedad","Buscar a Dios como el camino hacia la paz interior."],
+["VJaNEHFM9KE","Vive una vida libre de preocupación","",182,2015,"","ansiedad","Un mensaje corto para soltar las preocupaciones en las manos de Dios."],
+["lkCKXUXOmN8","4 consejos para que te acuestes en paz","",140,2015,"","ansiedad","Para quien no logra descansar por las preocupaciones del día."],
+["pghZz46b0CM","Sal de la tienda de la depresión","",125,2013,"","ansiedad","Un llamado a levantarse de la tristeza profunda y el desánimo."],
+["2qF7_WKcx44","No des lugar al desánimo","",160,2025,"","ansiedad esperanza","Cómo cerrarle la puerta al desánimo y seguir adelante."],
+["N_GpKuMh2AY","Tengo ansiedad y no lo sé","",3173,2023,"P","ansiedad","Conversación sobre cómo reconocer la ansiedad y enfrentarla desde la Palabra."],
+["zTS7TDnxQNg","La ansiedad","Pastor Ricardo Rodríguez",2737,2016,"","ansiedad","Para quien vive con una preocupación continua y no sabe cómo vencerla."],
+["QwQdbuiYf4Y","Dios nunca te abandona","",55,2026,"","soledad","Un minuto para recordar que Dios no se aparta de ti."],
+["5rh_KL1dZhE","Dios no te ha abandonado","",718,2025,"","soledad prueba","Para quien siente que Dios está lejos: Él sigue ahí."],
+["Dhd-KxH8_OI","Nunca te abandonaré","",199,2024,"","soledad","La promesa de Dios de no dejar nunca a los suyos."],
+["5hyY_dVbRxQ","No estás solo","",185,2015,"","soledad","Un mensaje corto para quien atraviesa la soledad."],
+["JFMBxw69NOE","El Señor no te rechaza",PP,347,2025,"","soledad salvacion","Para quien se siente rechazado: Dios recibe a quien se acerca a Él."],
+["tVekQ4_TYFs","¿Amas a Dios y te sientes perdido?",PP,253,2024,"","soledad","Para quien ama a Dios pero no encuentra el rumbo."],
+["Owa5Up2AiJg","Tengo una carga en mi corazón",PP,194,2024,"","soledad ansiedad","Qué hacer con las cargas que pesan en el corazón."],
+["qf6woG-Hhso","¿A quién corres en la necesidad?",PP,202,2024,"","soledad prueba","En la necesidad, el primer lugar al que correr es Dios."],
+["lLZcRuUociM","El altar familiar",PP,652,2025,"","familia","La importancia del altar familiar y la huella que deja en los hijos."],
+["L7rtsbuHr-M","Instruye a tus hijos en el camino de Dios",PP,182,2024,"","familia","El llamado a los padres a enseñar a sus hijos el camino de Dios."],
+["Td-dr4S9CYo","Responsables de nuestros hijos","",444,2024,"","familia","La responsabilidad espiritual que tienen los padres con sus hijos."],
+["_eMNaofNcYs","Enseñando a los hijos en la fe","",310,2024,"","familia","Cómo transmitir la fe a los hijos en la vida diaria."],
+["OnwFMHEAtQE","¿A dónde estás acercando tu hogar?","",268,2014,"","familia","Una pregunta para revisar el rumbo espiritual de la familia."],
+["r6cNUFuSzMM","¿Cómo expresar amor a nuestros hijos?","",4923,2020,"","familia","Un llamado a los padres a volver el corazón hacia sus hijos y expresarles amor."],
+["kGE-PbOD6Zc","Padres y suegros","",1982,2023,"P","familia","Conversación sobre la relación con padres y suegros en la vida de pareja."],
+["uCzKC-CeZ54","Seminario de la familia: el perdón (parte 2)","Pastores Ricardo y Ma. Patricia Rodríguez",3420,2020,"","familia perdon","Dejar que el Espíritu Santo limpie el corazón y no permitir raíces de amargura en la familia."],
+["6xrHfOShM3Y","¿Qué pasa si no perdonas?","",437,2025,"","perdon","Las consecuencias de guardar la falta de perdón en el corazón."],
+["1FUc2Eey1R4","Una decisión llamada perdón","",227,2015,"","perdon","Presenta el perdón como una decisión que libera."],
+["r2vXYRV6-mE","Dios perdonó todos tus pecados","",174,2015,"","perdon salvacion","Para quien carga culpa: el perdón de Dios es completo."],
+["422mkxWJGgQ","Perdonando","",207,2020,"","perdon","Cómo liberarse de las cargas pesadas que impiden avanzar."],
+["lkWQSXsZsnI","Lo grande que es perdonar","",2853,2024,"P","perdon","Conversación sobre el valor y el proceso del perdón."],
+["3N4dP2lIpGM","Tu esperanza puesta en Dios","",482,2025,"","esperanza","Poner la esperanza en Dios y no en las circunstancias."],
+["EVz9wGQ-_tQ","Espera en Dios","",415,2024,"","esperanza prueba","Aprender a esperar en Dios mientras llega su respuesta."],
+["O7s5PpNbfpw","Sus promesas se cumplirán","",572,2025,"","esperanza prueba","En el momento más oscuro, no rendirse: aunque no se vea, Dios está obrando."],
+["wtcCXQSRW8A","Si Dios lo dijo, Él lo hará",PP,205,2024,"","esperanza","La fidelidad de Dios para cumplir lo que ha prometido."],
+["X9Yffl5LRbQ","Confía en la protección del Señor",PP,253,2024,"","esperanza ansiedad","En la adversidad, correr al Señor y confiar en su protección."],
+["AWcqITlH3v0","Pon tu confianza en Dios","",218,2025,"","esperanza","Un mensaje corto para afirmar la confianza en Dios."],
+["nsJ8o9OqCMc","¿Qué te impide creer en las promesas de Dios?","",504,2026,"","esperanza","Lo que estorba la fe y cómo volver a creer en lo que Dios prometió."],
+["WRVD6OSiNDQ","Él es la resurrección y la vida","",292,2024,"","esperanza","Dios puede devolverle la vida a los sueños que se dieron por muertos."],
+["gSo8vvA-Vn8","Dios puede resucitar tus sueños",PP,321,2024,"","esperanza","Para quien siente que sus sueños murieron: Dios los puede levantar."],
+["JK84OskjHIg","No es en tus fuerzas","",831,2025,"","esperanza prueba","Cuando las fuerzas se acaban, Dios sostiene."],
+["4laS0pmTibY","El sustento en la vejez","",69,2022,"","esperanza soledad","Una promesa para los adultos mayores: Dios los sostiene en la vejez."],
+["Q22p7ZqxC04","¿Estás seguro de tu salvación?","Pastora Ana María Pardo",241,2026,"","salvacion","Una invitación a tener certeza de la salvación en Cristo."],
+["H113SjY0n64","Dios no envió a su Hijo para condenarnos","",279,2026,"","salvacion perdon","Dios envió a Jesús para salvar, no para condenar."],
+["scXwohwcKiI","Nos ama de tal manera","",213,2026,"","salvacion","El amor de Dios que entregó a su Hijo por cada persona."],
+["H-dMSt2UYCA","Jesús está llamando a la puerta","",120,2026,"","salvacion","Jesús llama a la puerta del corazón y espera que le abras."],
+["GpRHzuReEy4","Él puede salvarte","",99,2026,"","salvacion","Un llamado breve a recibir la salvación en Jesús."],
+["lIHWL2Fa_og","Él es el único camino","",102,2026,"","salvacion","Jesús como el camino para llegar a Dios."],
+["kUmG5pT1iUY","¿Quién eres en Cristo?","",656,2026,"","salvacion soledad","La nueva identidad de quien está en Cristo."],
+["QRHdskfbP90","Busca a Dios",PP,265,2024,"","salvacion","Una invitación a buscar a Dios de todo corazón."],
+["CnMfIZUIY40","Arrepentirse trae bendición","",209,2024,"","salvacion perdon","El arrepentimiento como puerta a la bendición de Dios."],
+["IZRLqh_fEnM","Cómo ser libre de las adicciones",PP,595,2025,"","salvacion familia","El camino de libertad que Dios ofrece a quien lucha con una adicción."],
+["Nx_lhQtHCwA", "Muerte, yo seré tu muerte", "Pastor Ricardo Rodríguez", 2745, 2026, "F", "duelo esperanza", "Jesús no solo enfrentó la muerte: la venció para siempre. Habla de la morada celestial y la eternidad junto a Él que espera al creyente."],
+["Uw6wDzS2Bh0", "Vengo a cambiar tu lloro", "Pastor Ricardo Rodríguez", 2226, 2026, "F", "duelo prueba", "Para quien está en medio del dolor y la aflicción: la promesa de Dios de cambiar su realidad."],
+["LrqRXNWTX2E", "Cambiaré su lloro en gozo", "Pastor Ricardo Rodríguez", 1883, 2024, "F", "duelo", "Para la noche del dolor: Dios promete convertir el llanto en gozo."],
+["Gca38JzFek4", "¿Hasta cuándo llorarás?", "Pastor Ricardo Rodríguez", 2850, 2021, "F", "duelo esperanza", "Un llamado a secar las lágrimas con la certeza de que el plan de Dios sigue en marcha."],
+["MYLDSFXEaCs", "El doble por cada dolor", "Pastor Ricardo Rodríguez", 2784, 2021, "F", "duelo prueba", "A partir de Zacarías 9:12, la promesa de Dios de restituir por cada dolor sufrido."],
+["jA0QIQQJJrc", "Cambia tu dolor por petición", "Pastor Juan Sebastián Rodríguez", 3146, 2021, "F", "duelo ansiedad", "Dios da óleo de alegría en lugar del espíritu de aflicción y tristeza."],
+["o4ERbIaKWlg", "Volverá", "Pastor Ricardo Rodríguez", 2177, 2026, "F", "esperanza duelo", "La esperanza del regreso de Cristo y del encuentro con Él."],
+["6EVakk26tSs", "Mentalidad de milagros", "Pastor Ricardo Rodríguez", 2600, 2025, "F", "enfermedad esperanza", "En los momentos difíciles, pensar como Dios piensa y pedirle una mentalidad de milagros."],
+["A-8SJ7yiIiM", "La fe no se fabrica, viene de Dios", "Pastor Ricardo Rodríguez", 2476, 2020, "F", "enfermedad esperanza", "La fe nace de una palabra de Dios. Cómo buscarla, actuar conforme a ella y fortalecerse en la dificultad."],
+["shNHsG2Dgag", "Dios está conmigo en el proceso", "Pastor Ricardo Rodríguez", 2060, 2026, "F", "prueba", "La presencia de Dios acompaña cada etapa del proceso."],
+["ehrnPJsf3Cc", "Entendiendo tus pruebas", "Pastor Ricardo Rodríguez", 2383, 2024, "F", "prueba", "Aprender a entender las pruebas sin culpar a Dios: Él tiene un plan de bendición al final del camino."],
+["9462rIsNZ04", "La poda del Padre", "Pastor Ricardo Rodríguez", 2627, 2025, "F", "prueba", "Como el árbol que se poda para dar más fruto, el Padre limpia el corazón para una vida más fructífera."],
+["yLTfypqBBuM", "Manantiales en el desierto", "Pastor Ricardo Rodríguez", 3237, 2025, "F", "prueba esperanza", "Dios hace brotar agua y consuelo en las temporadas más secas de la vida."],
+["6owMq5-5HT4", "Azafranes del desierto", "Pastor Ricardo Rodríguez", 2569, 2025, "F", "prueba ansiedad", "La gloria de Dios levanta al que está derrotado y hace reverdecer al que siente que se está muriendo."],
+["j57eRx3OSbM", "En medio de la prueba Él cuida de ti", "Pastor Ricardo Rodríguez", 2292, 2020, "F", "prueba", "Dios usa la prueba para formar el corazón y llevar a una condición mayor. Un llamado a no temer."],
+["fi6Ja1IPxQE", "En la prueba se activa el plan de Dios", "Pastor Ricardo Rodríguez", 2971, 2020, "F", "prueba", "Dios tiene el control. Mirar más allá del presente, hacia el futuro que Él prepara."],
+["8MipHmK65Ig", "En la prueba volarás más alto", "Pastor Ricardo Rodríguez", 2919, 2020, "F", "prueba", "Aunque no se entienda la prueba, Dios quiere llevarte más alto. Confiar en Él y en sus palabras de vida."],
+["RPaYxFhmy-w", "El fin de la aflicción", "Pastor Juan Sebastián Rodríguez", 2653, 2022, "F", "prueba", "Ánimo para no desmayar: el plan de Dios se está formando. Distinguir entre el camino y el destino."],
+["ufUMH4XhYyU", "Llegó el fin de tu aflicción", "Pastor Ricardo Rodríguez", 1879, 2020, "F", "prueba", "Dios ha visto la aflicción, ha oído el clamor y se acuerda de sus pactos."],
+["RK3hFN5ZjXA", "Después de la tormenta suben las aguas", "Pastor Ricardo Rodríguez", 2784, 2022, "F", "prueba esperanza", "Para el que permanece fiel: después de la tormenta viene un tiempo de bendición."],
+["BFCe8gM66JA", "Dios de montes y de valles", "Pastor Ricardo Rodríguez", 1994, 2024, "F", "prueba soledad", "En los momentos difíciles Dios está contigo: es Dios de los montes y también de los valles."],
+["b32uphmyfxc", "La solución a las crisis", "Pastor Ricardo Rodríguez", 2900, 2023, "F", "prueba ansiedad", "El Espíritu Santo como respuesta en las crisis. Dios no deja huérfanos a los suyos."],
+["T3Fu_pu7V3E", "El Espíritu en las crisis", "Pastor Ricardo Rodríguez", 3042, 2018, "F", "prueba", "Para quien atraviesa tiempos de crisis: la respuesta es una llenura fresca del Espíritu Santo."],
+["ybLskORv9QA", "Dios es mi fortaleza", "Pastor Juan Sebastián Rodríguez", 3370, 2024, "F", "prueba esperanza", "Fortalecerse en Dios y en su poder para alcanzar la victoria."],
+["brw4tgDrAbA", "La ansiedad", "Pastor Ricardo Rodríguez", 2110, 2018, "F", "ansiedad", "Desde Filipenses 4:6, cómo vencer la ansiedad, a la que llama la plaga de este siglo."],
+["uqjFG3AsJp8", "El afán y la angustia", "Pastor Ricardo Rodríguez", 2094, 2022, "F", "ansiedad", "Cómo la ansiedad roba la salud, la paz y los sueños, y cómo enfrentarla en Dios."],
+["YQMOcTAyaGM", "El desánimo", "Pastor Ricardo Rodríguez", 2381, 2019, "F", "ansiedad esperanza", "No desanimarse, no quejarse y mantener la esperanza en lo que Dios prometió."],
+["AHM8RpjyfS4", "Arriba ese ánimo: Habacuc", "Pastor Juan Sebastián Rodríguez", 2376, 2025, "F", "ansiedad prueba", "A partir del profeta Habacuc, cómo mantener el ánimo cuando las cosas no salen como se esperaba."],
+["Sx4vo0QIGe0", "Nunca me olvidaré de ti", "Pastor Ricardo Rodríguez", 2127, 2023, "F", "soledad", "Dios lo ve todo, lo oye todo y no se ha olvidado de los suyos."],
+["xorcXgkeg30", "Tenemos Padre", "Pastor Ricardo Rodríguez", 2232, 2019, "F", "soledad", "Le perteneces a Dios y Él es tu Padre. Qué significa relacionarse con el Padre celestial."],
+["oQKCaV_-3rg", "Mi padre es Dios", "Pastor Ricardo Rodríguez", 2382, 2022, "F", "soledad", "Dios es un Padre bueno que cuida de sus hijos."],
+["fW8txZH4NCs", "¡Somos amados!", "Pastor Juan Sebastián Rodríguez", 2493, 2020, "F", "soledad salvacion", "Tu valor está en lo que Dios dice de ti, no en lo que tienes ni en lo que dice la gente."],
+["oANHFhB6qtk", "Seminario de la familia: la pareja", "Pastor Ricardo Rodríguez", 3887, 2024, "F", "familia", "Hombres y mujeres tienen necesidades distintas. Entenderlas y aceptarlas fortalece el matrimonio."],
+["nvvJM70wAOM", "Seminario de la familia: los hijos", "Pastor Ricardo Rodríguez", 2903, 2024, "F", "familia", "Enseñanza para padres e hijos sobre la crianza y la relación en el hogar."],
+["iV4_w27wYnc", "Seminario de la familia: reconciliación y perdón", "Pastor Ricardo Rodríguez", 3562, 2024, "F", "familia perdon", "Es tiempo de perdonar y empezar de nuevo en el hogar."],
+["CvI8EbMvmSU", "El altar familiar", "Pastor Ricardo Rodríguez", 2297, 2018, "F", "familia", "La importancia de restaurar el altar de Dios en la casa."],
+["de71EMlswV8", "Dios perdonador", "Pastor Ricardo Rodríguez", 2105, 2025, "F", "perdon salvacion", "Dejar de cargar el pecado como un peso: Dios perdona, llama justo a su hijo y no se acuerda más."],
+["NBGEWZO_ejU", "Dios olvida", "Pastor Ricardo Rodríguez", 2484, 2023, "F", "perdon salvacion", "Cuando hay arrepentimiento genuino, Dios perdona y olvida."],
+["GPWEI02Mo0c", "El perdón, sanidad del alma", "Pastores Ricardo y Ma. Patricia Rodríguez", 3764, 2019, "F", "perdon", "La ofensa llena de amargura y resentimiento. Cómo perdonar y recibir sanidad interior."],
+["17OLVDmHwpg", "Las heridas y el perdón", "Pastor Ricardo Rodríguez", 3656, 2017, "F", "perdon", "Para quien ha sido herido, ofendido o carga heridas desde la niñez: entregarle las cargas al Señor y perdonar."],
+["okOzWlY3yR4", "Dios de segundas oportunidades", "Pastor Ricardo Rodríguez", 3438, 2017, "F", "perdon salvacion", "Para quien siente que echó a perder el plan de Dios: un mensaje de esperanza y nuevos comienzos."],
+["mvd_zFd0rqo", "Aún hay esperanza", "Pastor Ricardo Rodríguez", 2758, 2024, "F", "esperanza", "Algo bueno está por venir: aún hay esperanza."],
+["cCYjFhpuQ2s", "Un futuro lleno de esperanza", "Pastor Ricardo Rodríguez", 2310, 2022, "F", "esperanza", "Dios tiene un plan de bendición para tu vida. Un llamado a confiar."],
+["arE7u8kQC3s", "En Dios está tu esperanza", "Pastor Ricardo Rodríguez", 2393, 2020, "F", "esperanza prueba", "La esperanza es la confianza de que los problemas no son eternos y las heridas sanarán."],
+["B9icOm6IP_o", "Uno con esperanza", "Pastor Ricardo Rodríguez", 2378, 2019, "F", "esperanza", "Ninguno que espera en Dios será avergonzado. Nunca perder la esperanza."],
+["Y6Afb_JDmoU", "No pierdas la esperanza", "Pastor Ricardo Rodríguez", 2146, 2018, "F", "esperanza", "Quien tiene esperanza no se rinde: confía en que los problemas no serán eternos."],
+["xHxz39r0cbA", "Aferrados a sus promesas", "Pastor Ricardo Rodríguez", 2295, 2026, "F", "esperanza", "Sostenerse en las promesas de Dios en todo tiempo."],
+["cCkq8_lyv0M", "Dios cumple sus promesas", "Pastor Ricardo Rodríguez", 2475, 2020, "F", "esperanza prueba", "En medio de la angustia, limpiar las lágrimas y dejar la queja: Dios tiene un plan de bendición."],
+["5l7oyzA6S8I", "Una esperanza resiliente", "Pastor Juan Sebastián Rodríguez", 4329, 2021, "F", "esperanza prueba", "Cuando llega la tormenta y no sabes dónde está Dios, anclar la vida a sus promesas para no caer en la desesperanza."],
+["-WcxYCGPh6Y", "Descansando en sus promesas", "Pastor Juan Sebastián Rodríguez", 2240, 2021, "F", "esperanza ansiedad", "En los momentos más difíciles es cuando Dios quiere cumplir sus promesas."],
+["Z8VboI-VkTs", "Prisioneros de esperanza", "Pastor Ricardo Rodríguez", 2034, 2018, "F", "esperanza", "Mantener la esperanza y dejar que el Señor actúe: Él promete restaurar."],
+["i12c5BTuOeY", "El hijo pródigo", "Pastor Ricardo Rodríguez", 2796, 2021, "F", "salvacion familia", "Por la sangre de Jesús hay reconciliación con Dios y un expediente limpio para quien vuelve al Padre."],
+["cP2sjLQv0U8", "Es necesario nacer de nuevo", "Pastora Ma. Patricia Rodríguez", 2672, 2025, "F", "salvacion", "No importa cuántos años en la iglesia: es necesario nacer de nuevo y tener la certeza del Espíritu en el corazón."],
+["HkWsTVNyGWE", "La sangre de mi reconciliación", "Pastor Ricardo Rodríguez", 2158, 2024, "F", "salvacion perdon", "Al creer en Jesús, su sangre nos reconcilia con Dios y Él no se acuerda más de nuestros pecados."],
+["FiymK2arl70", "Volviendo a casa", "Pastor Ricardo Rodríguez", 2787, 2018, "F", "salvacion", "Para quien lo perdió todo y quiere volver al Padre: Jesús espera con los brazos abiertos."],
+["RBO74MVRiIo", "Comprados por su sangre", "Pastor Ricardo Rodríguez", 2650, 2019, "F", "salvacion", "En la cruz Jesús pagó el precio de nuestra maldad y nos hizo hijos de Dios."],
+["z3NNYt9YSb0", "Decreto de gracia", "Pastor Ricardo Rodríguez", 2331, 2017, "F", "salvacion esperanza", "Como Mefi-boset en Lodebar, para quien siente que su vida es un desierto: la gracia de Dios lo restaura."]
+].map(a=>({id:a[0],t:a[1],who:a[2],s:a[3],y:a[4],ty:a[5],c:a[6].split(" "),d:a[7]}));
+
+const $=s=>document.querySelector(s);
+const fmt=s=>{const h=Math.floor(s/3600),m=Math.floor(s%3600/60);return h?`${h} h ${m} min`:m?`${m} min`:`${s} s`};
+const isFull=v=>v.ty==="F"||(v.ty===""&&v.s>2400);
+const kind=v=>v.ty==="T"?"Testimonio":v.ty==="P"?"Conversación":isFull(v)?"Prédica completa":"Mensaje corto";
+const url=v=>"https://www.youtube.com/watch?v="+v.id;
+const norm=s=>s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
+const S=p=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
+const CI={
+ duelo:S('<path d="M12 3c2 3 4 5 4 8a4 4 0 0 1-8 0c0-3 2-5 4-8z"/><path d="M9 21h6M12 15v6"/>'),
+ enfermedad:S('<path d="M20.8 8.6a5 5 0 0 0-8.8-3.2 5 5 0 0 0-8.8 3.2c0 5 8.8 11 8.8 11s8.8-6 8.8-11z"/><path d="M7 12h3l1.5-2.5L13.5 14 15 12h2"/>'),
+ prueba:S('<path d="M17.5 17H7a4.5 4.5 0 1 1 1-8.9A6 6 0 0 1 19.5 10a3.5 3.5 0 0 1-2 7z"/><path d="m12 13-1.5 3h3L12 19"/>'),
+ ansiedad:S('<path d="M3 8h11a3 3 0 1 0-3-3"/><path d="M3 12h15a3 3 0 1 1-3 3"/><path d="M3 16h7"/>'),
+ soledad:S('<circle cx="12" cy="8" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/>'),
+ familia:S('<path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-5h4v5"/>'),
+ perdon:S('<path d="M10 14a4 4 0 0 1 0-5.6l2.5-2.5a4 4 0 0 1 5.6 5.6L17 12.6"/><path d="M14 10a4 4 0 0 1 0 5.6l-2.5 2.5a4 4 0 0 1-5.6-5.6L7 11.4"/>'),
+ esperanza:S('<path d="M3 18h18M6 18a6 6 0 0 1 12 0"/><path d="M12 6V3M5.6 9.6 3.5 7.5M18.4 9.6l2.1-2.1"/>'),
+ salvacion:S('<path d="M12 3v18M7 8h10"/>')};
+const ICON={play:'<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>',
+share:S('<path d="M20.5 11.5a8.5 8.5 0 0 1-12.6 7.4L3.5 20l1.2-4.2a8.5 8.5 0 1 1 15.8-4.3z"/>'),
+copy:S('<rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/>')};
+let cur="",mode="all";
+
+function tiles(){
+  $("#tiles").innerHTML=CATS.map(c=>`<button class="tile glass" type="button" id="tile-${c.k}" data-k="${c.k}" aria-pressed="${cur===c.k}"><span class="ic">${CI[c.k]}</span><span><b>${c.t}</b><span>${c.s}</span></span></button>`).join("");
+  document.querySelectorAll(".tile").forEach(b=>b.onclick=()=>{location.hash=cur===b.dataset.k?"":b.dataset.k});
+}
+function card(v){
+  const msg=`${v.t}\n${url(v)}\n\nUn mensaje de la iglesia Avivamiento para ti.`;
+  return `<article class="item glass">
+  <div class="meta"><span class="pill ${v.ty==="T"?"t":isFull(v)?"f":""}">${kind(v)}</span><span>${fmt(v.s)}</span><span class="dot"></span><span>${v.y}</span></div>
+  <h3>${v.t}</h3>
+  <p>${v.d}</p>${v.who?`<div class="who">${v.who}</div>`:""}
+  <div class="actions"><a class="btn primary" href="${url(v)}" target="_blank" rel="noopener">${ICON.play}Ver mensaje</a>
+  <a class="btn" href="https://wa.me/?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener">${ICON.share}WhatsApp</a>
+  <button class="btn icon" type="button" data-copy="${url(v)}" aria-label="Copiar enlace" title="Copiar enlace">${ICON.copy}</button></div></article>`;
+}
+function filtered(list){
+  const q=norm($("#search").value.trim());
+  return list.filter(v=>(mode!=="short"||v.s<900)&&(mode!=="test"||v.ty==="T")&&(mode!=="full"||isFull(v))&&(!q||norm(v.t+" "+v.d+" "+v.who).includes(q)));
+}
+function render(){
+  tiles();
+  document.querySelectorAll(".seg button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.f===mode));
+  const out=$("#results");
+  const cats=cur?CATS.filter(c=>c.k===cur):CATS;
+  let html="",total=0;
+  if(cur) html+=`<button class="back glass" type="button" id="back">← Todos los temas</button>`;
+  for(const c of cats){
+    const list=filtered(V.filter(v=>v.c.includes(c.k))).sort((a,b)=>isFull(a)-isFull(b)||(a.ty==="T")-(b.ty==="T")||a.s-b.s);
+    if(!list.length) continue; total+=list.length;
+    html+=`<section class="cat" id="sec-${c.k}"><div class="cat-head glass"><div><h2>${c.t}</h2><div class="n">${c.s} · ${list.length} ${list.length===1?"mensaje":"mensajes"}</div></div><div><q>${c.v}</q><span class="ref">${c.r}</span></div></div><div class="grid">${list.map(card).join("")}</div></section>`;
+  }
+  if(!total) html+=`<p class="empty glass">No hay mensajes con esa búsqueda. Prueba con otra palabra o cambia el filtro.</p>`;
+  out.innerHTML=html;
+  const bk=$("#back"); if(bk) bk.onclick=()=>{location.hash=""};
+  out.querySelectorAll("[data-copy]").forEach(b=>b.onclick=()=>copy(b.dataset.copy));
+}
+function toast(t){const e=$("#toast");e.textContent=t;e.hidden=false;clearTimeout(toast.h);toast.h=setTimeout(()=>e.hidden=true,1800)}
+function copy(t){try{navigator.clipboard.writeText(t).then(()=>toast("Enlace copiado")).catch(()=>fallback(t))}catch(e){fallback(t)}}
+function fallback(t){const i=document.createElement("input");i.value=t;document.body.appendChild(i);i.select();try{document.execCommand("copy");toast("Enlace copiado")}catch(e){toast("Selecciona y copia: "+t)}i.remove()}
+function route(){const h=location.hash.slice(1);cur=CATS.some(c=>c.k===h)?h:"";render();if(cur)$("#results").scrollIntoView({block:"start"})}
+$("#st-n").textContent=V.length; $("#st-s").textContent=V.filter(isFull).length;
+$("#search").addEventListener("input",render);
+document.querySelectorAll(".seg button").forEach(b=>b.onclick=()=>{mode=b.dataset.f;render()});
+window.addEventListener("hashchange",route);
+route();
+</script>
