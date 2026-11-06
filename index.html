@@ -84,8 +84,9 @@ h1 em{font-style:italic;color:var(--ink-2)}
 .head-row{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap}
 h2{font-family:var(--f-display);font-weight:400;font-size:clamp(32px,4.4vw,44px);line-height:1.02;letter-spacing:-.015em;margin:0;text-wrap:balance}
 .sub{color:var(--ink-3);font-size:14px;margin:6px 0 0}
-.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:20px}
-@media (max-width:820px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:20px}
+@media (max-width:980px){.tiles{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:680px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:420px){.tiles{gap:9px}}
 .tile{appearance:none;font:inherit;color:var(--ink);text-align:left;cursor:pointer;border-radius:20px;padding:16px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:center;transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s}
 .tile:hover{transform:translateY(-2px)}
@@ -143,7 +144,7 @@ footer a{color:var(--ink);font-weight:600}
 <div class="bar">
   <div class="bar-in glass">
     <div class="brand"><span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 3v18M5 9h14"/></svg></span><span class="bt">Avivamiento<small>Ministerio de Visitación</small></span></div>
-    <div class="search-wrap"><input id="search" class="search" type="search" placeholder="Buscar: paz, hijos, cáncer…" aria-label="Buscar un mensaje"></div>
+    <div class="search-wrap"><input id="search" class="search" type="search" placeholder="Buscar: hijos, sanidad, liberación…" aria-label="Buscar un mensaje"></div>
   </div>
 </div>
 
@@ -157,11 +158,11 @@ footer a{color:var(--ink);font-weight:600}
     <aside class="vcard glass">
       <q>Cercano está Jehová a los quebrantados de corazón; y salva a los contritos de espíritu.</q>
       <span class="ref">Salmos 34:18</span>
-      <div class="stats"><div><b id="st-n">89</b><span>mensajes</span></div><div><b>9</b><span>temas</span></div><div><b id="st-s">60</b><span>prédicas completas</span></div></div>
+      <div class="stats"><div><b id="st-n">89</b><span>mensajes</span></div><div><b id="st-c">17</b><span>temas</span></div><div><b id="st-s">60</b><span>prédicas completas</span></div></div>
     </aside>
   </section>
 
-  <section aria-labelledby="q">
+  <section aria-labelledby="q" id="situaciones">
     <div class="head-row">
       <div><h2 id="q">¿Por qué estás pasando?</h2><p class="sub">Toca una situación para ver los mensajes de ese tema.</p></div>
       <div class="seg glass" role="group" aria-label="Filtrar mensajes">
@@ -182,105 +183,79 @@ footer a{color:var(--ink);font-weight:600}
 
 <script>
 const CATS=[
- {k:"duelo",t:"Perdí a un ser querido",s:"Duelo y consuelo",v:"Le dijo Jesús: Yo soy la resurrección y la vida; el que cree en mí, aunque esté muerto, vivirá.",r:"Juan 11:25"},
- {k:"enfermedad",t:"Estoy enfermo",s:"Sanidad y testimonios",v:"Bendice, alma mía, a Jehová, y no olvides ninguno de sus beneficios. Él es quien perdona todas tus iniquidades, el que sana todas tus dolencias.",r:"Salmos 103:2-3"},
- {k:"prueba",t:"Estoy en una prueba",s:"Fe en medio de la crisis",v:"Cuando pases por las aguas, yo estaré contigo; y si por los ríos, no te anegarán. Cuando pases por el fuego, no te quemarás, ni la llama arderá en ti.",r:"Isaías 43:2"},
- {k:"ansiedad",t:"Tengo ansiedad o temor",s:"Paz para el corazón",v:"Por nada estéis afanosos, sino sean conocidas vuestras peticiones delante de Dios en toda oración y ruego, con acción de gracias. Y la paz de Dios, que sobrepasa todo entendimiento, guardará vuestros corazones y vuestros pensamientos en Cristo Jesús.",r:"Filipenses 4:6-7"},
- {k:"soledad",t:"Me siento solo",s:"Dios no te abandona",v:"Aunque mi padre y mi madre me dejaran, con todo, Jehová me recogerá.",r:"Salmos 27:10"},
- {k:"familia",t:"Mi familia necesita ayuda",s:"Hogar, hijos y restauración",v:"Ellos dijeron: Cree en el Señor Jesucristo, y serás salvo, tú y tu casa.",r:"Hechos 16:31"},
- {k:"perdon",t:"Me cuesta perdonar",s:"Perdón y heridas del alma",v:"Antes sed benignos unos con otros, misericordiosos, perdonándoos unos a otros, como Dios también os perdonó a vosotros en Cristo.",r:"Efesios 4:32"},
- {k:"esperanza",t:"Necesito esperanza",s:"Fe y promesas de Dios",v:"Por la misericordia de Jehová no hemos sido consumidos, porque nunca decayeron sus misericordias. Nuevas son cada mañana; grande es tu fidelidad.",r:"Lamentaciones 3:22-23"},
- {k:"salvacion",t:"Quiero volver a Dios",s:"Salvación y nueva vida",v:"Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito, para que todo aquel que en él cree, no se pierda, mas tenga vida eterna.",r:"Juan 3:16"}
+ {k:"duelo",t:"Perdí a un ser querido",s:"Duelo y consuelo",w:"duelo luto muerte murio fallecio perdida partida cielo eternidad vida eterna resurreccion consuelo viuda viudo funeral velorio llanto lagrimas extrañar",v:"Le dijo Jesús: Yo soy la resurrección y la vida; el que cree en mí, aunque esté muerto, vivirá.",r:"Juan 11:25"},
+ {k:"enfermedad",t:"Estoy enfermo",s:"Sanidad y milagros",w:"sanidad sanar sano enfermedad enfermo milagro cancer tumor leucemia diagnostico hospital clinica cirugia operacion medico dolor salud quimioterapia",v:"Bendice, alma mía, a Jehová, y no olvides ninguno de sus beneficios. Él es quien perdona todas tus iniquidades, el que sana todas tus dolencias.",r:"Salmos 103:2-3"},
+ {k:"prueba",t:"Estoy en una prueba",s:"Fe en medio de la crisis",w:"prueba crisis tormenta problema dificultad aflicción proceso desierto lucha sufrimiento",v:"Cuando pases por las aguas, yo estaré contigo; y si por los ríos, no te anegarán. Cuando pases por el fuego, no te quemarás, ni la llama arderá en ti.",r:"Isaías 43:2"},
+ {k:"ansiedad",t:"Tengo ansiedad",s:"Paz para el corazón",w:"ansiedad afan angustia preocupacion estres nervios insomnio paz",v:"Por nada estéis afanosos, sino sean conocidas vuestras peticiones delante de Dios en toda oración y ruego, con acción de gracias. Y la paz de Dios, que sobrepasa todo entendimiento, guardará vuestros corazones y vuestros pensamientos en Cristo Jesús.",r:"Filipenses 4:6-7"},
+ {k:"temor",t:"Tengo miedo",s:"Fe en lugar de temor",w:"miedo temor panico susto amenaza intimidacion morir",v:"No temas, porque yo estoy contigo; no desmayes, porque yo soy tu Dios que te esfuerzo; siempre te ayudaré, siempre te sustentaré con la diestra de mi justicia.",r:"Isaías 41:10"},
+ {k:"depresion",t:"Estoy triste o desanimado",s:"Ánimo para el alma",w:"depresion deprimido tristeza triste desanimo desanimado desesperanza vacio llorar llanto cansado agotado sin ganas",v:"¿Por qué te abates, oh alma mía, y por qué te turbas dentro de mí? Espera en Dios; porque aún he de alabarle, salvación mía y Dios mío.",r:"Salmos 42:11"},
+ {k:"soledad",t:"Me siento solo",s:"Dios no te abandona",w:"soledad solo sola abandono abandonado rechazo rechazado olvidado identidad",v:"Aunque mi padre y mi madre me dejaran, con todo, Jehová me recogerá.",r:"Salmos 27:10"},
+ {k:"familia",t:"Mi hogar necesita ayuda",s:"Familia y restauración",w:"familia hogar casa restauracion conflictos peleas parientes",v:"Ellos dijeron: Cree en el Señor Jesucristo, y serás salvo, tú y tu casa.",r:"Hechos 16:31"},
+ {k:"matrimonio",t:"Mi matrimonio",s:"Pareja y relaciones",w:"matrimonio pareja esposo esposa novio novia noviazgo divorcio separacion infidelidad yugo desigual",v:"Y si alguno prevaleciere contra uno, dos le resistirán; y cordón de tres dobleces no se rompe pronto.",r:"Eclesiastés 4:12"},
+ {k:"hijos",t:"Mis hijos",s:"Crianza y generaciones",w:"hijos hijo hija niños niño adolescentes jovenes crianza padres papa mama generacion bebe",v:"Instruye al niño en su camino, y aun cuando fuere viejo no se apartará de él.",r:"Proverbios 22:6"},
+ {k:"perdon",t:"Me cuesta perdonar",s:"Heridas y perdón",w:"perdon perdonar heridas herido ofensa rencor resentimiento amargura culpa trauma pasado",v:"Antes sed benignos unos con otros, misericordiosos, perdonándoos unos a otros, como Dios también os perdonó a vosotros en Cristo.",r:"Efesios 4:32"},
+ {k:"liberacion",t:"Necesito liberación",s:"Ataduras, opresión y vicios",w:"liberacion libertad libre ataduras cadenas opresion oprimido endemoniado demonio demonios diablo satanas enemigo brujeria hechiceria maldicion maldiciones guerra espiritual adiccion adicciones vicio alcohol droga",v:"Así que, si el Hijo os libertare, seréis verdaderamente libres.",r:"Juan 8:36"},
+ {k:"necesidad",t:"Estoy pasando necesidad",s:"Provisión, trabajo y deudas",w:"necesidad escasez dinero plata trabajo empleo desempleo deuda deudas finanzas provision proveedor arriendo vejez adulto mayor",v:"Mi Dios, pues, suplirá todo lo que os falta conforme a sus riquezas en gloria en Cristo Jesús.",r:"Filipenses 4:19"},
+ {k:"mujer",t:"Para la mujer",s:"Madres, viudas y mujeres solas",w:"mujer mujeres madre mama viuda madre soltera esposa abandonada",v:"Porque tu marido es tu Hacedor; Jehová de los ejércitos es su nombre; y tu Redentor, el Santo de Israel; Dios de toda la tierra será llamado.",r:"Isaías 54:5"},
+ {k:"esperanza",t:"Necesito esperanza",s:"Fe y promesas de Dios",w:"esperanza fe promesa promesas confianza confiar esperar sueños futuro",v:"Por la misericordia de Jehová no hemos sido consumidos, porque nunca decayeron sus misericordias. Nuevas son cada mañana; grande es tu fidelidad.",r:"Lamentaciones 3:22-23"},
+ {k:"salvacion",t:"Quiero volver a Dios",s:"Salvación y nueva vida",w:"salvacion salvo salvar jesus reconciliacion arrepentimiento volver a dios hijo prodigo nacer de nuevo nueva vida segunda oportunidad gracia",v:"Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito, para que todo aquel que en él cree, no se pierda, mas tenga vida eterna.",r:"Juan 3:16"},
+ {k:"oracion",t:"Quiero aprender a orar",s:"Oración y ayuno",w:"oracion orar clamor clamar ayuno ayunar padre nuestro intercesion",v:"Clama a mí, y yo te responderé, y te enseñaré cosas grandes y ocultas que tú no conoces.",r:"Jeremías 33:3"},
+ {k:"jovenes",t:"Soy joven",s:"Identidad y propósito",w:"joven jovenes juventud adolescente adolescentes generacion identidad proposito amistades colegio universidad",v:"Ninguno tenga en poco tu juventud, sino sé ejemplo de los creyentes en palabra, conducta, amor, espíritu, fe y pureza.",r:"1 Timoteo 4:12"},
+ {k:"nuevos",t:"Soy nuevo en la fe",s:"Primeros pasos con Jesús",w:"nuevo nueva recien convertido convertida empezar primeros pasos nacer de nuevo biblia seguir a jesus quien es jesus bautismo discipulado crecer",v:"De modo que si alguno está en Cristo, nueva criatura es; las cosas viejas pasaron; he aquí todas son hechas nuevas.",r:"2 Corintios 5:17"},
+ {k:"espiritu",t:"Quiero conocer al Espíritu Santo",s:"Su presencia y su guía",w:"espiritu santo presencia uncion llenura bautismo del espiritu guia consolador paloma ruah",v:"Mas el Consolador, el Espíritu Santo, a quien el Padre enviará en mi nombre, él os enseñará todas las cosas, y os recordará todo lo que yo os he dicho.",r:"Juan 14:26"}
 ];
 const PP="Pastora Ma. Patricia Rodríguez";
 // [id, título, quién, segundos, año, tipo (T testimonio, P podcast, ''), temas, descripción]
 const V=[
-["vaxVQrOykL8","Sanidad después de una gran pérdida","",186,2026,"T","duelo enfermedad","Roxana perdió a su hijo de 8 años y la tristeza llegó a afectar su salud. Cuenta cómo Dios restauró su cuerpo y su corazón."],
-["zMTlQaXdRsU","No temas, Dios está contigo",PP,304,2024,"","duelo soledad","Mensaje para las viudas, las mujeres abandonadas y las madres solas, desde Isaías 54: Dios es esposo fiel y defensor, y ve cada lágrima."],
-["WhF28bcZN4g","El que cree en Jesús tiene vida eterna","",186,2026,"","duelo salvacion","La promesa de vida eterna para quien cree en Jesús. Un mensaje breve de esperanza frente a la muerte."],
-["e-dD51W0mz4","Adiós al temor a morir: sana del corazón","",216,2026,"T","duelo enfermedad ansiedad","Testimonio de sanidad del corazón y de una persona que dejó atrás el temor a la muerte."],
-["DLR5AyqpJ0Y","Nada nos podrá separar de su amor",PP,175,2024,"","duelo soledad","Sobre la seguridad del amor de Dios, que ninguna circunstancia puede quebrar."],
-["G0nvl_m1Fkc","Tenemos esperanza","",1243,2026,"","duelo esperanza","La esperanza que el creyente tiene en Dios, aun en los momentos más oscuros."],
-["LG0EtK4sVqk","¿Necesitas un milagro?",PP,162,2024,"","enfermedad","La historia de una mujer que perseveró en la fe aunque todos le decían que no, hasta alcanzar su milagro."],
-["-3XbkBJ7RCc","Mentalidad de milagros","",562,2025,"","enfermedad esperanza","Invita a creer que Dios sigue haciendo milagros hoy y a esperar su intervención."],
-["AwsRNtcwzPA","Los milagros de Dios","",241,2014,"","enfermedad","Mensaje corto sobre el poder de Dios para obrar milagros."],
-["3bAlEjPJQ6Y","El examen confirmó el milagro: la leucemia desapareció","",114,2026,"T","enfermedad","Leidy recibió un diagnóstico de leucemia. Ella y su esposo se aferraron a Dios servicio tras servicio."],
-["vRW7ph_xsx0","Tenía cáncer metastásico y Dios la sanó","",177,2026,"T","enfermedad","Neiza siguió creyendo aunque la quimioterapia no funcionó. Cuenta cómo Dios la sostuvo hasta su sanidad."],
-["o7mPvGXT6b4","Dios me sanó de una enfermedad incurable","",286,2026,"T","enfermedad","Testimonio de sanidad de una artritis reumatoide que, según los médicos, no tenía cura."],
-["73hbFFTGens","Cuando Dios cambió el diagnóstico de Judith","",164,2025,"T","enfermedad","Judith tenía siete masas en la tiroides y decidió creerle a Dios."],
-["Xs8kx2Epp9s","Su cirugía no funcionó, pero su fe sí","",159,2026,"T","enfermedad","Yumer vivía con dolor diario después de una fractura y una cirugía que no dio resultado, hasta que Dios lo sanó."],
-["9Nh7c-K5Mds","Sobrevivió a un brutal accidente","",169,2026,"T","enfermedad","David salió despedido 26 metros en un accidente de tránsito. Su historia de recuperación."],
-["buNayCz2Zi4","No podía caminar y hoy corre por un milagro de Dios","",221,2026,"T","enfermedad","Sharoon nació con una enfermedad genética de los huesos y pasó por decenas de cirugías. Hoy cuenta lo que Dios hizo."],
-["mjCs8NghatU","Cuando la fe espera su milagro","",120,2025,"T","enfermedad prueba","Leidy esperó hasta el siguiente servicio confiando en Dios, y fue sanada de cálculos renales."],
-["1JWHmYdzjQw","¿Por qué la prueba?","",826,2026,"","prueba","Responde la pregunta que muchos se hacen en medio del dolor: para qué permite Dios la prueba."],
-["PdCcLLVr-PI","La tormenta no cambiará el plan de Dios","",762,2026,"","prueba esperanza","Las crisis no anulan lo que Dios ha dicho sobre tu vida."],
-["mnAdc__RwDE","En medio del horno de la prueba: Jesús está contigo","",570,2026,"","prueba","A partir del horno de fuego, recuerda que Jesús acompaña a los suyos en la prueba."],
-["WI3lIaOq5qw","Dios está contigo en la prueba","",684,2026,"","prueba soledad","La presencia de Dios no se aparta cuando llegan los días difíciles."],
-["w_sP_h8bUdo","¿Cómo reaccionar en medio de la prueba?","",707,2025,"","prueba","Cómo mantener la fe firme y el corazón confiado en Dios cuando llegan las pruebas."],
-["wzPyzGVAAqc","En medio de la prueba","",762,2025,"","prueba","Ánimo para quien está atravesando un proceso difícil."],
-["i2cqTidWXtA","Manantiales en el desierto","",1045,2025,"","prueba esperanza","Dios hace brotar provisión y consuelo en las temporadas más secas de la vida."],
-["7EkhJG8wLnA","¿Estás en la tormenta?",PP,158,2024,"","prueba","Un mensaje breve para quien siente que la tormenta no termina."],
-["qB5QbSYihJY","En la dificultad",PP,200,2024,"","prueba","En los momentos difíciles, correr a Dios y confiar en Él antes que en el hombre."],
-["WigJ9QarhQI","Tu propósito no elimina tu proceso","Pastora Ana María Pardo",491,2026,"","prueba","Tener un propósito de Dios no evita los procesos; los procesos forman el propósito."],
-["IwwL1EBNCu0","Después de la prueba","",317,2024,"","prueba esperanza","Lo que Dios trae a la vida cuando la prueba termina."],
-["WMwndD0HzE4","De la aflicción al milagro: la fe de Ana",PP,285,2025,"","prueba","Ana transformó su dolor en oración y su oración en milagro."],
-["Q90J6gW8fzI","El propósito de la aflicción","",2774,2015,"","prueba","Cuando la situación parece no tener salida, Dios sigue obrando un plan para bien."],
-["QmMcs2UiEpY","3 consejos para superar la ansiedad",PP,316,2025,"","ansiedad","Tres consejos bíblicos y prácticos para enfrentar la ansiedad."],
-["8BmwCpCAB54","No te afanes, ¡confía en Dios!",PP,185,2024,"","ansiedad","Cambiar el afán por la confianza en el cuidado de Dios."],
-["o8J25Eo3Eug","¿Qué hacer en el día de la angustia?",PP,273,2024,"","ansiedad prueba","Qué hacer cuando llega la angustia y hacia dónde dirigir el corazón."],
-["X1ravjCb6nQ","Necesitamos paz","",353,2024,"","ansiedad","La paz que viene de Dios en medio de la inquietud."],
-["Aet1XGah4jw","Paz al que busque a Dios","",351,2024,"","ansiedad","Buscar a Dios como el camino hacia la paz interior."],
-["VJaNEHFM9KE","Vive una vida libre de preocupación","",182,2015,"","ansiedad","Un mensaje corto para soltar las preocupaciones en las manos de Dios."],
-["lkCKXUXOmN8","4 consejos para que te acuestes en paz","",140,2015,"","ansiedad","Para quien no logra descansar por las preocupaciones del día."],
-["pghZz46b0CM","Sal de la tienda de la depresión","",125,2013,"","ansiedad","Un llamado a levantarse de la tristeza profunda y el desánimo."],
-["2qF7_WKcx44","No des lugar al desánimo","",160,2025,"","ansiedad esperanza","Cómo cerrarle la puerta al desánimo y seguir adelante."],
-["N_GpKuMh2AY","Tengo ansiedad y no lo sé","",3173,2023,"P","ansiedad","Conversación sobre cómo reconocer la ansiedad y enfrentarla desde la Palabra."],
-["zTS7TDnxQNg","La ansiedad","Pastor Ricardo Rodríguez",2737,2016,"","ansiedad","Para quien vive con una preocupación continua y no sabe cómo vencerla."],
-["QwQdbuiYf4Y","Dios nunca te abandona","",55,2026,"","soledad","Un minuto para recordar que Dios no se aparta de ti."],
-["5rh_KL1dZhE","Dios no te ha abandonado","",718,2025,"","soledad prueba","Para quien siente que Dios está lejos: Él sigue ahí."],
-["Dhd-KxH8_OI","Nunca te abandonaré","",199,2024,"","soledad","La promesa de Dios de no dejar nunca a los suyos."],
-["5hyY_dVbRxQ","No estás solo","",185,2015,"","soledad","Un mensaje corto para quien atraviesa la soledad."],
-["JFMBxw69NOE","El Señor no te rechaza",PP,347,2025,"","soledad salvacion","Para quien se siente rechazado: Dios recibe a quien se acerca a Él."],
-["tVekQ4_TYFs","¿Amas a Dios y te sientes perdido?",PP,253,2024,"","soledad","Para quien ama a Dios pero no encuentra el rumbo."],
-["Owa5Up2AiJg","Tengo una carga en mi corazón",PP,194,2024,"","soledad ansiedad","Qué hacer con las cargas que pesan en el corazón."],
-["qf6woG-Hhso","¿A quién corres en la necesidad?",PP,202,2024,"","soledad prueba","En la necesidad, el primer lugar al que correr es Dios."],
-["lLZcRuUociM","El altar familiar",PP,652,2025,"","familia","La importancia del altar familiar y la huella que deja en los hijos."],
-["L7rtsbuHr-M","Instruye a tus hijos en el camino de Dios",PP,182,2024,"","familia","El llamado a los padres a enseñar a sus hijos el camino de Dios."],
-["Td-dr4S9CYo","Responsables de nuestros hijos","",444,2024,"","familia","La responsabilidad espiritual que tienen los padres con sus hijos."],
-["_eMNaofNcYs","Enseñando a los hijos en la fe","",310,2024,"","familia","Cómo transmitir la fe a los hijos en la vida diaria."],
-["OnwFMHEAtQE","¿A dónde estás acercando tu hogar?","",268,2014,"","familia","Una pregunta para revisar el rumbo espiritual de la familia."],
-["r6cNUFuSzMM","¿Cómo expresar amor a nuestros hijos?","",4923,2020,"","familia","Un llamado a los padres a volver el corazón hacia sus hijos y expresarles amor."],
-["kGE-PbOD6Zc","Padres y suegros","",1982,2023,"P","familia","Conversación sobre la relación con padres y suegros en la vida de pareja."],
-["uCzKC-CeZ54","Seminario de la familia: el perdón (parte 2)","Pastores Ricardo y Ma. Patricia Rodríguez",3420,2020,"","familia perdon","Dejar que el Espíritu Santo limpie el corazón y no permitir raíces de amargura en la familia."],
-["6xrHfOShM3Y","¿Qué pasa si no perdonas?","",437,2025,"","perdon","Las consecuencias de guardar la falta de perdón en el corazón."],
-["1FUc2Eey1R4","Una decisión llamada perdón","",227,2015,"","perdon","Presenta el perdón como una decisión que libera."],
-["r2vXYRV6-mE","Dios perdonó todos tus pecados","",174,2015,"","perdon salvacion","Para quien carga culpa: el perdón de Dios es completo."],
-["422mkxWJGgQ","Perdonando","",207,2020,"","perdon","Cómo liberarse de las cargas pesadas que impiden avanzar."],
-["lkWQSXsZsnI","Lo grande que es perdonar","",2853,2024,"P","perdon","Conversación sobre el valor y el proceso del perdón."],
-["3N4dP2lIpGM","Tu esperanza puesta en Dios","",482,2025,"","esperanza","Poner la esperanza en Dios y no en las circunstancias."],
-["EVz9wGQ-_tQ","Espera en Dios","",415,2024,"","esperanza prueba","Aprender a esperar en Dios mientras llega su respuesta."],
-["O7s5PpNbfpw","Sus promesas se cumplirán","",572,2025,"","esperanza prueba","En el momento más oscuro, no rendirse: aunque no se vea, Dios está obrando."],
-["wtcCXQSRW8A","Si Dios lo dijo, Él lo hará",PP,205,2024,"","esperanza","La fidelidad de Dios para cumplir lo que ha prometido."],
-["X9Yffl5LRbQ","Confía en la protección del Señor",PP,253,2024,"","esperanza ansiedad","En la adversidad, correr al Señor y confiar en su protección."],
-["AWcqITlH3v0","Pon tu confianza en Dios","",218,2025,"","esperanza","Un mensaje corto para afirmar la confianza en Dios."],
-["nsJ8o9OqCMc","¿Qué te impide creer en las promesas de Dios?","",504,2026,"","esperanza","Lo que estorba la fe y cómo volver a creer en lo que Dios prometió."],
-["WRVD6OSiNDQ","Él es la resurrección y la vida","",292,2024,"","esperanza","Dios puede devolverle la vida a los sueños que se dieron por muertos."],
-["gSo8vvA-Vn8","Dios puede resucitar tus sueños",PP,321,2024,"","esperanza","Para quien siente que sus sueños murieron: Dios los puede levantar."],
-["JK84OskjHIg","No es en tus fuerzas","",831,2025,"","esperanza prueba","Cuando las fuerzas se acaban, Dios sostiene."],
-["4laS0pmTibY","El sustento en la vejez","",69,2022,"","esperanza soledad","Una promesa para los adultos mayores: Dios los sostiene en la vejez."],
-["Q22p7ZqxC04","¿Estás seguro de tu salvación?","Pastora Ana María Pardo",241,2026,"","salvacion","Una invitación a tener certeza de la salvación en Cristo."],
-["H113SjY0n64","Dios no envió a su Hijo para condenarnos","",279,2026,"","salvacion perdon","Dios envió a Jesús para salvar, no para condenar."],
-["scXwohwcKiI","Nos ama de tal manera","",213,2026,"","salvacion","El amor de Dios que entregó a su Hijo por cada persona."],
-["H-dMSt2UYCA","Jesús está llamando a la puerta","",120,2026,"","salvacion","Jesús llama a la puerta del corazón y espera que le abras."],
-["GpRHzuReEy4","Él puede salvarte","",99,2026,"","salvacion","Un llamado breve a recibir la salvación en Jesús."],
-["lIHWL2Fa_og","Él es el único camino","",102,2026,"","salvacion","Jesús como el camino para llegar a Dios."],
-["kUmG5pT1iUY","¿Quién eres en Cristo?","",656,2026,"","salvacion soledad","La nueva identidad de quien está en Cristo."],
-["QRHdskfbP90","Busca a Dios",PP,265,2024,"","salvacion","Una invitación a buscar a Dios de todo corazón."],
-["CnMfIZUIY40","Arrepentirse trae bendición","",209,2024,"","salvacion perdon","El arrepentimiento como puerta a la bendición de Dios."],
-["IZRLqh_fEnM","Cómo ser libre de las adicciones",PP,595,2025,"","salvacion familia","El camino de libertad que Dios ofrece a quien lucha con una adicción."],
-["Nx_lhQtHCwA", "Muerte, yo seré tu muerte", "Pastor Ricardo Rodríguez", 2745, 2026, "F", "duelo esperanza", "Jesús no solo enfrentó la muerte: la venció para siempre. Habla de la morada celestial y la eternidad junto a Él que espera al creyente."],
-["Uw6wDzS2Bh0", "Vengo a cambiar tu lloro", "Pastor Ricardo Rodríguez", 2226, 2026, "F", "duelo prueba", "Para quien está en medio del dolor y la aflicción: la promesa de Dios de cambiar su realidad."],
-["LrqRXNWTX2E", "Cambiaré su lloro en gozo", "Pastor Ricardo Rodríguez", 1883, 2024, "F", "duelo", "Para la noche del dolor: Dios promete convertir el llanto en gozo."],
+["vaxVQrOykL8", "Sanidad después de una gran pérdida", "", 186, 2026, "T", "duelo enfermedad", "Roxana perdió a su hijo de 8 años y la tristeza llegó a afectar su salud. Cuenta cómo Dios restauró su cuerpo y su corazón."],
+["zMTlQaXdRsU", "No temas, Dios está contigo", "Pastora Ma. Patricia Rodríguez", 304, 2024, "", "duelo soledad mujer", "Mensaje para las viudas, las mujeres abandonadas y las madres solas, desde Isaías 54: Dios es esposo fiel y defensor, y ve cada lágrima."],
+["WhF28bcZN4g", "El que cree en Jesús tiene vida eterna", "Pastores Juan Sebastián y Ana María Rodríguez", 186, 2026, "", "duelo salvacion", "La promesa de vida eterna para quien cree en Jesús. Un mensaje breve de esperanza frente a la muerte."],
+["e-dD51W0mz4", "Adiós al temor a morir: sana del corazón", "", 216, 2026, "T", "duelo enfermedad ansiedad temor", "Testimonio de sanidad del corazón y de una persona que dejó atrás el temor a la muerte."],
+["DLR5AyqpJ0Y", "Nada nos podrá separar de su amor", "Pastora Ma. Patricia Rodríguez", 175, 2024, "", "duelo soledad", "Sobre la seguridad del amor de Dios, que ninguna circunstancia puede quebrar."],
+["LG0EtK4sVqk", "¿Necesitas un milagro?", "Pastora Ma. Patricia Rodríguez", 162, 2024, "", "enfermedad mujer", "La historia de una mujer que perseveró en la fe aunque todos le decían que no, hasta alcanzar su milagro."],
+["3bAlEjPJQ6Y", "El examen confirmó el milagro: la leucemia desapareció", "", 114, 2026, "T", "enfermedad", "Leidy recibió un diagnóstico de leucemia. Ella y su esposo se aferraron a Dios servicio tras servicio."],
+["vRW7ph_xsx0", "Tenía cáncer metastásico y Dios la sanó", "", 177, 2026, "T", "enfermedad", "Neiza siguió creyendo aunque la quimioterapia no funcionó. Cuenta cómo Dios la sostuvo hasta su sanidad."],
+["o7mPvGXT6b4", "Dios me sanó de una enfermedad incurable", "", 286, 2026, "T", "enfermedad", "Testimonio de sanidad de una artritis reumatoide que, según los médicos, no tenía cura."],
+["73hbFFTGens", "Cuando Dios cambió el diagnóstico de Judith", "", 164, 2025, "T", "enfermedad", "Judith tenía siete masas en la tiroides y decidió creerle a Dios."],
+["Xs8kx2Epp9s", "Su cirugía no funcionó, pero su fe sí", "", 159, 2026, "T", "enfermedad", "Yumer vivía con dolor diario después de una fractura y una cirugía que no dio resultado, hasta que Dios lo sanó."],
+["9Nh7c-K5Mds", "Sobrevivió a un brutal accidente", "", 169, 2026, "T", "enfermedad", "David salió despedido 26 metros en un accidente de tránsito. Su historia de recuperación."],
+["buNayCz2Zi4", "No podía caminar y hoy corre por un milagro de Dios", "", 221, 2026, "T", "enfermedad", "Sharoon nació con una enfermedad genética de los huesos y pasó por decenas de cirugías. Hoy cuenta lo que Dios hizo."],
+["mjCs8NghatU", "Cuando la fe espera su milagro", "", 120, 2025, "T", "enfermedad prueba", "Leidy esperó hasta el siguiente servicio confiando en Dios, y fue sanada de cálculos renales."],
+["7EkhJG8wLnA", "¿Estás en la tormenta?", "Pastora Ma. Patricia Rodríguez", 158, 2024, "", "prueba", "Un mensaje breve para quien siente que la tormenta no termina."],
+["qB5QbSYihJY", "En la dificultad", "Pastora Ma. Patricia Rodríguez", 200, 2024, "", "prueba", "En los momentos difíciles, correr a Dios y confiar en Él antes que en el hombre."],
+["WigJ9QarhQI", "Tu propósito no elimina tu proceso", "Pastora Ana María Pardo", 491, 2026, "", "prueba", "Tener un propósito de Dios no evita los procesos; los procesos forman el propósito."],
+["WMwndD0HzE4", "De la aflicción al milagro: la fe de Ana", "Pastora Ma. Patricia Rodríguez", 285, 2025, "", "prueba mujer", "Ana transformó su dolor en oración y su oración en milagro."],
+["QmMcs2UiEpY", "3 consejos para superar la ansiedad", "Pastora Ma. Patricia Rodríguez", 316, 2025, "", "ansiedad temor", "Tres consejos bíblicos y prácticos para enfrentar la ansiedad."],
+["8BmwCpCAB54", "No te afanes, ¡confía en Dios!", "Pastora Ma. Patricia Rodríguez", 185, 2024, "", "ansiedad necesidad", "Cambiar el afán por la confianza en el cuidado de Dios."],
+["o8J25Eo3Eug", "¿Qué hacer en el día de la angustia?", "Pastora Ma. Patricia Rodríguez", 273, 2024, "", "ansiedad prueba", "Qué hacer cuando llega la angustia y hacia dónde dirigir el corazón."],
+["pghZz46b0CM", "Sal de la tienda de la depresión", "Pastor Ricardo Rodríguez", 125, 2013, "", "ansiedad depresion", "Un llamado a levantarse de la tristeza profunda y el desánimo."],
+["N_GpKuMh2AY", "Tengo ansiedad y no lo sé", "Pastores Juan Sebastián y Ana María Rodríguez", 3173, 2023, "P", "ansiedad", "Conversación sobre cómo reconocer la ansiedad y enfrentarla desde la Palabra."],
+["zTS7TDnxQNg", "La ansiedad", "Pastor Ricardo Rodríguez", 2737, 2016, "", "ansiedad temor", "Para quien vive con una preocupación continua y no sabe cómo vencerla."],
+["JFMBxw69NOE", "El Señor no te rechaza", "Pastora Ma. Patricia Rodríguez", 347, 2025, "", "soledad salvacion", "Para quien se siente rechazado: Dios recibe a quien se acerca a Él."],
+["tVekQ4_TYFs", "¿Amas a Dios y te sientes perdido?", "Pastora Ma. Patricia Rodríguez", 253, 2024, "", "soledad", "Para quien ama a Dios pero no encuentra el rumbo."],
+["Owa5Up2AiJg", "Tengo una carga en mi corazón", "Pastora Ma. Patricia Rodríguez", 194, 2024, "", "soledad ansiedad depresion", "Qué hacer con las cargas que pesan en el corazón."],
+["qf6woG-Hhso", "¿A quién corres en la necesidad?", "Pastora Ma. Patricia Rodríguez", 202, 2024, "", "soledad prueba necesidad oracion", "En la necesidad, el primer lugar al que correr es Dios."],
+["lLZcRuUociM", "El altar familiar", "Pastora Ma. Patricia Rodríguez", 652, 2025, "", "familia", "La importancia del altar familiar y la huella que deja en los hijos."],
+["L7rtsbuHr-M", "Instruye a tus hijos en el camino de Dios", "Pastora Ma. Patricia Rodríguez", 182, 2024, "", "familia hijos", "El llamado a los padres a enseñar a sus hijos el camino de Dios."],
+["kGE-PbOD6Zc", "Padres y suegros", "Pastores Juan Sebastián y Ana María Rodríguez", 1982, 2023, "P", "familia matrimonio", "Conversación sobre la relación con padres y suegros en la vida de pareja."],
+["uCzKC-CeZ54", "Seminario de la familia: el perdón (parte 2)", "Pastores Ricardo y Ma. Patricia Rodríguez", 3420, 2020, "", "familia perdon matrimonio", "Dejar que el Espíritu Santo limpie el corazón y no permitir raíces de amargura en la familia."],
+["422mkxWJGgQ", "Perdonando", "Pastores Juan Sebastián y Ana María Rodríguez", 207, 2020, "", "perdon", "Cómo liberarse de las cargas pesadas que impiden avanzar."],
+["lkWQSXsZsnI", "Lo grande que es perdonar", "Pastores Juan Sebastián y Ana María Rodríguez", 2853, 2024, "P", "perdon", "Conversación sobre el valor y el proceso del perdón."],
+["wtcCXQSRW8A", "Si Dios lo dijo, Él lo hará", "Pastora Ma. Patricia Rodríguez", 205, 2024, "", "esperanza", "La fidelidad de Dios para cumplir lo que ha prometido."],
+["X9Yffl5LRbQ", "Confía en la protección del Señor", "Pastora Ma. Patricia Rodríguez", 253, 2024, "", "esperanza ansiedad", "En la adversidad, correr al Señor y confiar en su protección."],
+["gSo8vvA-Vn8", "Dios puede resucitar tus sueños", "Pastora Ma. Patricia Rodríguez", 321, 2024, "", "esperanza", "Para quien siente que sus sueños murieron: Dios los puede levantar."],
+["Q22p7ZqxC04", "¿Estás seguro de tu salvación?", "Pastora Ana María Pardo", 241, 2026, "", "salvacion nuevos", "Una invitación a tener certeza de la salvación en Cristo."],
+["H113SjY0n64", "Dios no envió a su Hijo para condenarnos", "Pastores Juan Sebastián y Ana María Rodríguez", 279, 2026, "", "salvacion perdon", "Dios envió a Jesús para salvar, no para condenar."],
+["scXwohwcKiI", "Nos ama de tal manera", "Pastores Juan Sebastián y Ana María Rodríguez", 213, 2026, "", "salvacion", "El amor de Dios que entregó a su Hijo por cada persona."],
+["H-dMSt2UYCA", "Jesús está llamando a la puerta", "Pastores Juan Sebastián y Ana María Rodríguez", 120, 2026, "", "salvacion", "Jesús llama a la puerta del corazón y espera que le abras."],
+["GpRHzuReEy4", "Él puede salvarte", "Pastores Juan Sebastián y Ana María Rodríguez", 99, 2026, "", "salvacion", "Un llamado breve a recibir la salvación en Jesús."],
+["lIHWL2Fa_og", "Él es el único camino", "Pastores Juan Sebastián y Ana María Rodríguez", 102, 2026, "", "salvacion", "Jesús como el camino para llegar a Dios."],
+["kUmG5pT1iUY", "¿Quién eres en Cristo?", "Pastores Juan Sebastián y Ana María Rodríguez", 656, 2026, "", "salvacion soledad jovenes nuevos", "La nueva identidad de quien está en Cristo."],
+["QRHdskfbP90", "Busca a Dios", "Pastora Ma. Patricia Rodríguez", 265, 2024, "", "salvacion", "Una invitación a buscar a Dios de todo corazón."],
+["IZRLqh_fEnM", "Cómo ser libre de las adicciones", "Pastora Ma. Patricia Rodríguez", 595, 2025, "", "salvacion familia liberacion", "El camino de libertad que Dios ofrece a quien lucha con una adicción."],
+["Nx_lhQtHCwA", "Muerte, yo seré tu muerte", "Pastor Ricardo Rodríguez", 2745, 2026, "F", "duelo esperanza temor", "Jesús no solo enfrentó la muerte: la venció para siempre. Habla de la morada celestial y la eternidad junto a Él que espera al creyente."],
+["Uw6wDzS2Bh0", "Vengo a cambiar tu lloro", "Pastor Ricardo Rodríguez", 2226, 2026, "F", "duelo prueba depresion", "Para quien está en medio del dolor y la aflicción: la promesa de Dios de cambiar su realidad."],
+["LrqRXNWTX2E", "Cambiaré su lloro en gozo", "Pastor Ricardo Rodríguez", 1883, 2024, "F", "duelo depresion", "Para la noche del dolor: Dios promete convertir el llanto en gozo."],
 ["Gca38JzFek4", "¿Hasta cuándo llorarás?", "Pastor Ricardo Rodríguez", 2850, 2021, "F", "duelo esperanza", "Un llamado a secar las lágrimas con la certeza de que el plan de Dios sigue en marcha."],
 ["MYLDSFXEaCs", "El doble por cada dolor", "Pastor Ricardo Rodríguez", 2784, 2021, "F", "duelo prueba", "A partir de Zacarías 9:12, la promesa de Dios de restituir por cada dolor sufrido."],
 ["jA0QIQQJJrc", "Cambia tu dolor por petición", "Pastor Juan Sebastián Rodríguez", 3146, 2021, "F", "duelo ansiedad", "Dios da óleo de alegría en lugar del espíritu de aflicción y tristeza."],
@@ -291,7 +266,7 @@ const V=[
 ["ehrnPJsf3Cc", "Entendiendo tus pruebas", "Pastor Ricardo Rodríguez", 2383, 2024, "F", "prueba", "Aprender a entender las pruebas sin culpar a Dios: Él tiene un plan de bendición al final del camino."],
 ["9462rIsNZ04", "La poda del Padre", "Pastor Ricardo Rodríguez", 2627, 2025, "F", "prueba", "Como el árbol que se poda para dar más fruto, el Padre limpia el corazón para una vida más fructífera."],
 ["yLTfypqBBuM", "Manantiales en el desierto", "Pastor Ricardo Rodríguez", 3237, 2025, "F", "prueba esperanza", "Dios hace brotar agua y consuelo en las temporadas más secas de la vida."],
-["6owMq5-5HT4", "Azafranes del desierto", "Pastor Ricardo Rodríguez", 2569, 2025, "F", "prueba ansiedad", "La gloria de Dios levanta al que está derrotado y hace reverdecer al que siente que se está muriendo."],
+["6owMq5-5HT4", "Azafranes del desierto", "Pastor Ricardo Rodríguez", 2569, 2025, "F", "prueba ansiedad depresion", "La gloria de Dios levanta al que está derrotado y hace reverdecer al que siente que se está muriendo."],
 ["j57eRx3OSbM", "En medio de la prueba Él cuida de ti", "Pastor Ricardo Rodríguez", 2292, 2020, "F", "prueba", "Dios usa la prueba para formar el corazón y llevar a una condición mayor. Un llamado a no temer."],
 ["fi6Ja1IPxQE", "En la prueba se activa el plan de Dios", "Pastor Ricardo Rodríguez", 2971, 2020, "F", "prueba", "Dios tiene el control. Mirar más allá del presente, hacia el futuro que Él prepara."],
 ["8MipHmK65Ig", "En la prueba volarás más alto", "Pastor Ricardo Rodríguez", 2919, 2020, "F", "prueba", "Aunque no se entienda la prueba, Dios quiere llevarte más alto. Confiar en Él y en sus palabras de vida."],
@@ -299,20 +274,20 @@ const V=[
 ["ufUMH4XhYyU", "Llegó el fin de tu aflicción", "Pastor Ricardo Rodríguez", 1879, 2020, "F", "prueba", "Dios ha visto la aflicción, ha oído el clamor y se acuerda de sus pactos."],
 ["RK3hFN5ZjXA", "Después de la tormenta suben las aguas", "Pastor Ricardo Rodríguez", 2784, 2022, "F", "prueba esperanza", "Para el que permanece fiel: después de la tormenta viene un tiempo de bendición."],
 ["BFCe8gM66JA", "Dios de montes y de valles", "Pastor Ricardo Rodríguez", 1994, 2024, "F", "prueba soledad", "En los momentos difíciles Dios está contigo: es Dios de los montes y también de los valles."],
-["b32uphmyfxc", "La solución a las crisis", "Pastor Ricardo Rodríguez", 2900, 2023, "F", "prueba ansiedad", "El Espíritu Santo como respuesta en las crisis. Dios no deja huérfanos a los suyos."],
-["T3Fu_pu7V3E", "El Espíritu en las crisis", "Pastor Ricardo Rodríguez", 3042, 2018, "F", "prueba", "Para quien atraviesa tiempos de crisis: la respuesta es una llenura fresca del Espíritu Santo."],
+["b32uphmyfxc", "La solución a las crisis", "Pastor Ricardo Rodríguez", 2900, 2023, "F", "prueba ansiedad espiritu", "El Espíritu Santo como respuesta en las crisis. Dios no deja huérfanos a los suyos."],
+["T3Fu_pu7V3E", "El Espíritu en las crisis", "Pastor Ricardo Rodríguez", 3042, 2018, "F", "prueba espiritu", "Para quien atraviesa tiempos de crisis: la respuesta es una llenura fresca del Espíritu Santo."],
 ["ybLskORv9QA", "Dios es mi fortaleza", "Pastor Juan Sebastián Rodríguez", 3370, 2024, "F", "prueba esperanza", "Fortalecerse en Dios y en su poder para alcanzar la victoria."],
-["brw4tgDrAbA", "La ansiedad", "Pastor Ricardo Rodríguez", 2110, 2018, "F", "ansiedad", "Desde Filipenses 4:6, cómo vencer la ansiedad, a la que llama la plaga de este siglo."],
+["brw4tgDrAbA", "La ansiedad", "Pastor Ricardo Rodríguez", 2110, 2018, "F", "ansiedad temor", "Desde Filipenses 4:6, cómo vencer la ansiedad, a la que llama la plaga de este siglo."],
 ["uqjFG3AsJp8", "El afán y la angustia", "Pastor Ricardo Rodríguez", 2094, 2022, "F", "ansiedad", "Cómo la ansiedad roba la salud, la paz y los sueños, y cómo enfrentarla en Dios."],
-["YQMOcTAyaGM", "El desánimo", "Pastor Ricardo Rodríguez", 2381, 2019, "F", "ansiedad esperanza", "No desanimarse, no quejarse y mantener la esperanza en lo que Dios prometió."],
-["AHM8RpjyfS4", "Arriba ese ánimo: Habacuc", "Pastor Juan Sebastián Rodríguez", 2376, 2025, "F", "ansiedad prueba", "A partir del profeta Habacuc, cómo mantener el ánimo cuando las cosas no salen como se esperaba."],
+["YQMOcTAyaGM", "El desánimo", "Pastor Ricardo Rodríguez", 2381, 2019, "F", "ansiedad esperanza depresion", "No desanimarse, no quejarse y mantener la esperanza en lo que Dios prometió."],
+["AHM8RpjyfS4", "Arriba ese ánimo: Habacuc", "Pastor Juan Sebastián Rodríguez", 2376, 2025, "F", "ansiedad prueba depresion", "A partir del profeta Habacuc, cómo mantener el ánimo cuando las cosas no salen como se esperaba."],
 ["Sx4vo0QIGe0", "Nunca me olvidaré de ti", "Pastor Ricardo Rodríguez", 2127, 2023, "F", "soledad", "Dios lo ve todo, lo oye todo y no se ha olvidado de los suyos."],
 ["xorcXgkeg30", "Tenemos Padre", "Pastor Ricardo Rodríguez", 2232, 2019, "F", "soledad", "Le perteneces a Dios y Él es tu Padre. Qué significa relacionarse con el Padre celestial."],
 ["oQKCaV_-3rg", "Mi padre es Dios", "Pastor Ricardo Rodríguez", 2382, 2022, "F", "soledad", "Dios es un Padre bueno que cuida de sus hijos."],
-["fW8txZH4NCs", "¡Somos amados!", "Pastor Juan Sebastián Rodríguez", 2493, 2020, "F", "soledad salvacion", "Tu valor está en lo que Dios dice de ti, no en lo que tienes ni en lo que dice la gente."],
-["oANHFhB6qtk", "Seminario de la familia: la pareja", "Pastor Ricardo Rodríguez", 3887, 2024, "F", "familia", "Hombres y mujeres tienen necesidades distintas. Entenderlas y aceptarlas fortalece el matrimonio."],
-["nvvJM70wAOM", "Seminario de la familia: los hijos", "Pastor Ricardo Rodríguez", 2903, 2024, "F", "familia", "Enseñanza para padres e hijos sobre la crianza y la relación en el hogar."],
-["iV4_w27wYnc", "Seminario de la familia: reconciliación y perdón", "Pastor Ricardo Rodríguez", 3562, 2024, "F", "familia perdon", "Es tiempo de perdonar y empezar de nuevo en el hogar."],
+["fW8txZH4NCs", "¡Somos amados!", "Pastor Juan Sebastián Rodríguez", 2493, 2020, "F", "soledad salvacion jovenes", "Tu valor está en lo que Dios dice de ti, no en lo que tienes ni en lo que dice la gente."],
+["oANHFhB6qtk", "Seminario de la familia: la pareja", "Pastor Ricardo Rodríguez", 3887, 2024, "F", "familia matrimonio", "Hombres y mujeres tienen necesidades distintas. Entenderlas y aceptarlas fortalece el matrimonio."],
+["nvvJM70wAOM", "Seminario de la familia: los hijos", "Pastor Ricardo Rodríguez", 2903, 2024, "F", "familia hijos", "Enseñanza para padres e hijos sobre la crianza y la relación en el hogar."],
+["iV4_w27wYnc", "Seminario de la familia: reconciliación y perdón", "Pastor Ricardo Rodríguez", 3562, 2024, "F", "familia perdon matrimonio", "Es tiempo de perdonar y empezar de nuevo en el hogar."],
 ["CvI8EbMvmSU", "El altar familiar", "Pastor Ricardo Rodríguez", 2297, 2018, "F", "familia", "La importancia de restaurar el altar de Dios en la casa."],
 ["de71EMlswV8", "Dios perdonador", "Pastor Ricardo Rodríguez", 2105, 2025, "F", "perdon salvacion", "Dejar de cargar el pecado como un peso: Dios perdona, llama justo a su hijo y no se acuerda más."],
 ["NBGEWZO_ejU", "Dios olvida", "Pastor Ricardo Rodríguez", 2484, 2023, "F", "perdon salvacion", "Cuando hay arrepentimiento genuino, Dios perdona y olvida."],
@@ -329,12 +304,122 @@ const V=[
 ["5l7oyzA6S8I", "Una esperanza resiliente", "Pastor Juan Sebastián Rodríguez", 4329, 2021, "F", "esperanza prueba", "Cuando llega la tormenta y no sabes dónde está Dios, anclar la vida a sus promesas para no caer en la desesperanza."],
 ["-WcxYCGPh6Y", "Descansando en sus promesas", "Pastor Juan Sebastián Rodríguez", 2240, 2021, "F", "esperanza ansiedad", "En los momentos más difíciles es cuando Dios quiere cumplir sus promesas."],
 ["Z8VboI-VkTs", "Prisioneros de esperanza", "Pastor Ricardo Rodríguez", 2034, 2018, "F", "esperanza", "Mantener la esperanza y dejar que el Señor actúe: Él promete restaurar."],
-["i12c5BTuOeY", "El hijo pródigo", "Pastor Ricardo Rodríguez", 2796, 2021, "F", "salvacion familia", "Por la sangre de Jesús hay reconciliación con Dios y un expediente limpio para quien vuelve al Padre."],
-["cP2sjLQv0U8", "Es necesario nacer de nuevo", "Pastora Ma. Patricia Rodríguez", 2672, 2025, "F", "salvacion", "No importa cuántos años en la iglesia: es necesario nacer de nuevo y tener la certeza del Espíritu en el corazón."],
-["HkWsTVNyGWE", "La sangre de mi reconciliación", "Pastor Ricardo Rodríguez", 2158, 2024, "F", "salvacion perdon", "Al creer en Jesús, su sangre nos reconcilia con Dios y Él no se acuerda más de nuestros pecados."],
+["i12c5BTuOeY", "El hijo pródigo", "Pastor Ricardo Rodríguez", 2796, 2021, "F", "salvacion familia hijos", "Por la sangre de Jesús hay reconciliación con Dios y un expediente limpio para quien vuelve al Padre."],
+["cP2sjLQv0U8", "Es necesario nacer de nuevo", "Pastora Ma. Patricia Rodríguez", 2672, 2025, "F", "salvacion nuevos", "No importa cuántos años en la iglesia: es necesario nacer de nuevo y tener la certeza del Espíritu en el corazón."],
+["HkWsTVNyGWE", "La sangre de mi reconciliación", "Pastor Ricardo Rodríguez", 2158, 2024, "F", "salvacion perdon nuevos", "Al creer en Jesús, su sangre nos reconcilia con Dios y Él no se acuerda más de nuestros pecados."],
 ["FiymK2arl70", "Volviendo a casa", "Pastor Ricardo Rodríguez", 2787, 2018, "F", "salvacion", "Para quien lo perdió todo y quiere volver al Padre: Jesús espera con los brazos abiertos."],
-["RBO74MVRiIo", "Comprados por su sangre", "Pastor Ricardo Rodríguez", 2650, 2019, "F", "salvacion", "En la cruz Jesús pagó el precio de nuestra maldad y nos hizo hijos de Dios."],
-["z3NNYt9YSb0", "Decreto de gracia", "Pastor Ricardo Rodríguez", 2331, 2017, "F", "salvacion esperanza", "Como Mefi-boset en Lodebar, para quien siente que su vida es un desierto: la gracia de Dios lo restaura."]
+["RBO74MVRiIo", "Comprados por su sangre", "Pastor Ricardo Rodríguez", 2650, 2019, "F", "salvacion nuevos", "En la cruz Jesús pagó el precio de nuestra maldad y nos hizo hijos de Dios."],
+["z3NNYt9YSb0", "Decreto de gracia", "Pastor Ricardo Rodríguez", 2331, 2017, "F", "salvacion esperanza", "Como Mefi-boset en Lodebar, para quien siente que su vida es un desierto: la gracia de Dios lo restaura."],
+["bd4ORqHGgwc", "Libertad a los cautivos", "Pastor Ricardo Rodríguez", 2231, 2026, "F", "liberacion", "Desde Juan 8:36: si el Hijo te libertare, serás verdaderamente libre."],
+["d7o8aIwZ_8E", "Liberación espiritual", "Pastor Ricardo Rodríguez", 3211, 2021, "F", "liberacion", "Pasos para ser libre: arrepentirse, perdonar, limpiar la casa, renunciar a lo que ata y llenar la vida de la presencia de Dios."],
+["Kkf1VaLr_cQ", "Liberando los cautivos", "Pastor Ricardo Rodríguez", 3573, 2022, "F", "liberacion", "Dios quiere y puede liberar a quien vive atado. Cómo recibir esa libertad."],
+["piU-VBuG4ro", "Rescatando prisioneros", "Pastor Ricardo Rodríguez", 2277, 2026, "F", "liberacion", "Muchos han caído en trampas del enemigo y viven cautivos, pero Jesús vino a rescatarlos."],
+["qlhKzNAClyA", "La guerra espiritual", "Pastor Ricardo Rodríguez", 2073, 2026, "F", "liberacion", "Enseñanza sobre la batalla espiritual que enfrenta el creyente y cómo vencer en Dios."],
+["ud3oL-FUj6w", "El oprimido y el opresor", "Pastor Ricardo Rodríguez", 2240, 2023, "F", "liberacion enfermedad", "Dios quiere sanar y libertar al oprimido. Un llamado a cambiar la manera de creerle."],
+["cWzdDVPGUeI", "Liberación vendrá de alguna parte", "Pastor Ricardo Rodríguez", 1605, 2022, "F", "liberacion prueba", "Ante la aflicción y la adversidad, como Mardoqueo: la liberación de Dios llegará."],
+["ETCQa4oFLbo", "Invalidando maldiciones", "Pastor Ricardo Rodríguez", 2513, 2018, "F", "liberacion familia", "Para quien vive ruina, escasez o enfermedad repetida en su familia: cómo romper maldiciones generacionales en el nombre de Jesús."],
+["Eo342DUQfLQ", "Revocando maldiciones", "Pastor Ricardo Rodríguez", 2253, 2017, "F", "liberacion", "Qué es una maldición, por qué causas llega y cómo se revoca en Cristo."],
+["OnKeXZVhVpM", "Jaque mate a Satanás", "Pastor Ricardo Rodríguez", 2226, 2022, "F", "liberacion", "La victoria de Cristo sobre el enemigo es definitiva."],
+["NA9izxviJx4", "Ante las cartas del enemigo: ¡no temas!", "Pastor Ricardo Rodríguez", 2144, 2020, "F", "liberacion temor ansiedad enfermedad", "Cuando llega un mal reporte, llevarlo al altar de Dios: las batallas se ganan por el Espíritu."],
+["tQDdIrnW7DU", "Mensajeros del diablo", "Pastor Ricardo Rodríguez", 2051, 2023, "F", "liberacion ansiedad", "Dejar de escuchar las voces que quieren apagar la fe, hacer silencio y esperar en Dios."],
+["IK8JznY2lnA", "La respuesta ante la opresión", "Pastor Ricardo Rodríguez", 95, 2018, "", "liberacion", "Mensaje breve sobre cómo responder cuando llega la opresión."],
+["r4k1fYVBRHM", "Liberación: historia de la vida real", "", 266, 2016, "T", "liberacion", "Historia real de una persona a quien Dios rompió las cadenas y sanó el corazón."],
+["kdefRjv5lyU", "Amistades y amores saludables", "Pastora Ma. Patricia Rodríguez", 423, 2025, "", "matrimonio", "Tres consejos para construir relaciones que honren a Dios."],
+["A3HcOhFEBdw", "No más yugo desigual", "Pastores Juan Sebastián y Ana María Rodríguez", 2704, 2022, "P", "matrimonio jovenes", "¿Andarán dos juntos si no están de acuerdo? Conversación sobre el yugo desigual."],
+["VKZY6WKGJWs", "Benditas mis generaciones", "Pastor Ricardo Rodríguez", 1949, 2025, "F", "hijos familia", "La bendición de Dios sobre los hijos y las generaciones que vienen."],
+["2XfkMAEGno0", "Cómo evitar tragedias en tu generación", "Pastor Ricardo Rodríguez", 2403, 2017, "F", "hijos familia liberacion", "Las tragedias que se repiten en las familias y lo que ocurre cuando una generación se consagra a Dios."],
+["cSIRCXSHxVU", "Los niños del Éxodo", "Pastor Ricardo Rodríguez", 2588, 2026, "F", "hijos", "Prédica sobre el lugar de los niños en el plan de Dios."],
+["4k7oHjUUcDI", "Cuando no es lo que esperas: testimonio de la pérdida de un bebé", "Pastora Ana María Rodríguez", 2852, 2023, "F", "duelo hijos mujer", "La pastora comparte su testimonio de la pérdida de un bebé: la misericordia que sostiene y la consolación que alegra el alma."],
+["At7ARmdM3Ro", "Levantemos anclas", "Pastor Ricardo Rodríguez", 1860, 2021, "F", "depresion prueba", "Salir de la tienda de la depresión, quitar las vendas que impiden ver el plan de Dios y volver a mirar las estrellas."],
+["asGf1v5Uz8Y", "La noche oscura", "Pastor Ricardo Rodríguez", 2598, 2021, "F", "depresion duelo prueba", "En medio del dolor y las lágrimas verás al Señor. Viene la mañana de la alegría."],
+["YfSIRPju6Hw", "Cuando Dios hace silencio", "Pastor Ricardo Rodríguez", 2384, 2024, "F", "depresion prueba soledad", "Qué significa el silencio de Dios en los momentos difíciles."],
+["X8ga8NTGH-Y", "No llores a Saúl", "Pastor Ricardo Rodríguez", 2682, 2021, "F", "depresion perdon", "Dejar de llorar las malas decisiones y los errores: viene un tiempo nuevo."],
+["dA-F-wk9WEU", "Te tengo esculpida en mi mano", "Pastor Ricardo Rodríguez", 2377, 2025, "F", "soledad depresion", "Desde Isaías 49: Dios no se olvida de ti, te tiene grabado en sus manos."],
+["NrvKrkB-Xio", "Mi proveedor", "Pastor Ricardo Rodríguez", 146, 2018, "", "necesidad", "Un minuto para recordar que Dios es quien provee."],
+["kr4CTHttFMg", "Jubileo: cómo ser libre de las deudas", "Pastor Ricardo Rodríguez", 2919, 2019, "F", "necesidad liberacion", "La deuda quita la paz, la armonía familiar y el sueño. El jubileo de Dios sobre las finanzas."],
+["1wOXWzL1s3Q", "Cómo tener finanzas saludables", "Pastora Ma. Patricia Rodríguez", 528, 2025, "", "necesidad", "Consejos bíblicos para administrar las finanzas del hogar."],
+["pJHjedE690A", "Dios tiene un plan", "Pastor Ricardo Rodríguez", 3530, 2017, "F", "necesidad esperanza prueba", "Aunque no entiendas lo que estás viviendo, Dios tiene planes y propósito para ti."],
+["vsVImF-_DeY", "¡Dios abrirá camino otra vez!", "Pastor Ricardo Rodríguez", 2052, 2020, "F", "necesidad prueba esperanza", "En la aflicción, olvidar lo pasado y no temer: Dios abrirá camino en el desierto."],
+["NKTIn5aBD4Y", "Otra vez abriré caminos", "Pastor Ricardo Rodríguez", 2456, 2018, "F", "necesidad prueba", "Para quien está en un problema sin salida: una promesa de Dios a la cual aferrarse."],
+["v7xen8zA2no", "Él te abrirá camino", "Pastor Ricardo Rodríguez", 2951, 2021, "F", "necesidad esperanza", "Desde Isaías 43:19: Dios abre camino donde no lo hay."],
+["Q-To3JciYBA", "Mujer, este mensaje es para ti", "Pastora Ma. Patricia Rodríguez", 365, 2024, "", "mujer", "Un mensaje de la pastora dirigido especialmente a la mujer."],
+["v6bO7HKehOI", "Mujeres que siguen a Jesús", "Pastor Ricardo Rodríguez", 2927, 2025, "F", "mujer", "El ejemplo de las mujeres del Evangelio, que siguieron a Jesús con fidelidad hasta el final."],
+["oZeC_gSQp2A", "La mujer samaritana", "Pastor Ricardo Rodríguez", 2534, 2021, "F", "mujer salvacion soledad", "Jesús sale al encuentro para libertar del dolor y el rechazo. Él no condena, redime."],
+["VgLX1SW_jh4", "Mujeres del Evangelio", "Pastor Ricardo Rodríguez", 2384, 2022, "F", "mujer", "Grandes mujeres de la Biblia que conmovieron el corazón de Dios."],
+["TJ28wVfjHaY", "Madre solo hay una", "Pastores Juan Sebastián y Ana María Rodríguez", 2445, 2022, "P", "mujer hijos", "Conversación sobre el valor de la madre."],
+["X_gHHj5vI4Y", "Una mujer de verdad", "Pastores Juan Sebastián y Ana María Rodríguez", 1701, 2023, "P", "mujer", "Conversación sobre la identidad de la mujer según Dios."],
+["6-jAjl9vMCU", "¿Cómo orar? Aprende a importunar el cielo", "Pastor Ricardo Rodríguez", 2479, 2017, "F", "oracion nuevos", "La enseñanza de Jesús sobre la oración en Lucas 11 y la palabra griega que la explica."],
+["Xk33QKKptms", "El poder de la oración", "Pastor Juan Sebastián Rodríguez", 2505, 2025, "F", "oracion liberacion", "En la oración está el poder para detener el plan del enemigo sobre tu vida."],
+["anJK_Nf-eEM", "Orar sin límites", "Pastor Ricardo Rodríguez", 2466, 2022, "F", "oracion", "No hay nada imposible para Dios: orar sin ponerle límites."],
+["NX-0w8Pcc2k", "Oración con insolencia", "Pastor Ricardo Rodríguez", 2174, 2018, "F", "oracion", "Cómo pedir con insistencia para mover la mano de Dios."],
+["BZd3uKSj-yM", "Una oración exasperada", "Pastor Ricardo Rodríguez", 2109, 2025, "F", "oracion prueba", "Para cambiar el rumbo de una situación: oraciones sinceras y desesperadas, no elaboradas."],
+["dxzyz9JAMD4", "El poder de las rodillas", "Pastor Ricardo Rodríguez", 2104, 2024, "F", "oracion", "Ante los imposibles, orar en acuerdo con otra persona."],
+["F0fcuI2wuM8", "El Padre Nuestro", "Pastor Ricardo Rodríguez", 1914, 2023, "F", "oracion nuevos", "La oración que Jesús enseñó: un Dios todopoderoso que provee y guía."],
+["rb5IZLDyJWA", "El plan de Amán: qué es el ayuno", "Pastor Ricardo Rodríguez", 2012, 2018, "F", "oracion liberacion", "El ayuno como arma espiritual cuando el enemigo se levanta en contra."],
+["Gf2wMaQRIJM", "Un clamor genuino", "Pastora Ma. Patricia Rodríguez", 2431, 2019, "F", "oracion", "La tierra clama por la manifestación de los hijos de Dios. Cómo ser luz en medio de las tinieblas."],
+["tEZCJ-mfIh8", "Sigue creyendo", "Pastor Ricardo Rodríguez", 2344, 2025, "F", "enfermedad esperanza", "¿Necesitas un milagro? Dios te dice: sigue creyendo, Jesús es la respuesta."],
+["tlDQ9QHwIv8", "¿Temer o creer?", "Pastor Ricardo Rodríguez", 2347, 2024, "F", "enfermedad temor", "Cuando ya lo has intentado todo y necesitas un milagro, Dios dice: cree solamente."],
+["NmPMEToJkuY", "Cree solamente", "Pastor Ricardo Rodríguez", 2309, 2017, "F", "enfermedad hijos", "Jairo, ante la muerte inminente de su hija, superó los obstáculos para llegar a Jesús y recibir su milagro."],
+["hfskcqa-W_A", "El Dios que no conoce límites", "Pastor Ricardo Rodríguez", 2621, 2020, "F", "enfermedad esperanza", "Por imposible que parezca el milagro, la mano del Señor no se ha acortado."],
+["stw8U6qm5pM", "Posee la fe de Dios", "Pastor Ricardo Rodríguez", 3160, 2019, "F", "enfermedad esperanza", "La fe viene por oír la Palabra y da convicción para creer sin haber visto."],
+["X665WST7HMU", "¿Hasta cuándo, Dios?", "Pastora Ana María Rodríguez", 1939, 2024, "F", "enfermedad prueba depresion", "Cambiar la pregunta de ¿hasta cuándo? por un clamor: Señor, alumbra mis ojos para ver como tú ves."],
+["BjnPH_Auyo8", "Mi alma se aferra a ti", "Pastor Ricardo Rodríguez", 1984, 2024, "F", "enfermedad prueba", "Aferrarse a Dios cuando todo alrededor se mueve."],
+["G37fEKbDNcM", "Otra oportunidad", "Pastor Ricardo Rodríguez", 2680, 2019, "F", "salvacion perdon", "Para quien falló en su fe o en su familia y se ha estado escondiendo de Dios: el Señor da otra oportunidad."],
+["pxVoQUF6LNY", "Viene otra oportunidad", "Pastor Ricardo Rodríguez", 2375, 2025, "F", "salvacion esperanza", "Como Dios le dio un nuevo comienzo al pastor, tiene una nueva oportunidad para ti."],
+["t3-V2XkQ0hE", "Edicto de misericordia", "Pastor Ricardo Rodríguez", 2317, 2024, "F", "salvacion perdon", "Sobre nuestra vida hay un edicto de misericordia: por su gracia fuimos perdonados."],
+["kQxVs0Mh0Qg", "¿Quién es Jesús?", "Pastor Ricardo Rodríguez", 1892, 2020, "F", "salvacion enfermedad nuevos", "Jesús es el sanador, el Príncipe de paz y el que acompaña en el horno de la prueba."],
+["KB3yE6lMagg", "Vence la intimidación y la amenaza", "Pastor Ricardo Rodríguez", 3395, 2017, "F", "temor ansiedad liberacion", "Sacar fuera todo temor y silenciar la voz que intimida y paraliza."],
+["fqJQlEV6O50", "Sin temor", "Pastores Juan Sebastián y Ana María Rodríguez", 85, 2019, "", "temor salvacion", "Acercarse al Señor sin temor: corre a sus brazos, eres su hijo amado."],
+["jez7FlpIkgo", "Nuestros traumas", "Pastores Juan Sebastián y Ana María Rodríguez", 3209, 2023, "P", "perdon depresion", "Conversación sobre cómo identificar los traumas, dejar de ser preso del pasado y recibir el consuelo de Dios."],
+["TwcFnA-_42E", "¿Quién eres?", "Pastor Juan Sebastián Rodríguez", 4158, 2026, "F", "soledad salvacion jovenes", "Tu identidad no la definen las redes ni lo que dice el enemigo: eres linaje escogido y pueblo de Dios."],
+["5t9gTYtFZr0", "Tenía acalasia y Dios restauró su esófago", "", 179, 2026, "T", "enfermedad", "María Eugenia vivió años con una enfermedad que le impedía comer con normalidad. Cuenta cómo Dios la sanó."],
+["LeaJYCpYTNo", "Los médicos no podían creerlo: tenía piel nueva", "", 143, 2026, "T", "enfermedad", "Abby sufrió graves quemaduras en una pierna. Los médicos hablaban de reconstrucción, pero Dios restauró su piel."],
+["_zQ5BsBo_0w", "Nació sin esperanza, Dios tuvo la última palabra", "", 161, 2026, "T", "enfermedad", "Testimonio de un bebé con un pronóstico difícil al nacer y la intervención de Dios."],
+["QfEBTOm2KkI", "Lo que el accidente destruyó, Dios lo restauró", "", 130, 2026, "T", "enfermedad", "Yohn sufrió una fractura abierta en las manos en un accidente de tránsito. Su historia de restauración."],
+["wxw3gz8Kw-4", "Su columna se enderezó en un instante", "", 94, 2026, "T", "enfermedad", "Emanuel vivió años con escoliosis severa y decidió creer que Dios podía sanarlo."],
+["P6RxpVEkUgw", "Sentí que Dios me puso un corazón nuevo", "", 193, 2026, "T", "enfermedad", "Anny Daniela, una niña patinadora, sufría de síncope cardíaco. Testimonio de su sanidad."],
+["vsO9RAfPxwU", "Padre e hijo recibieron su milagro el mismo día", "", 113, 2026, "T", "enfermedad", "Víctor debía ser operado de la vesícula. En el mismo servicio, él y su hijo fueron sanados."],
+["FncWdo6YiSo", "Sufrió migrañas por años hasta que Dios la sanó", "", 145, 2026, "T", "enfermedad", "Desde los 15 años, Tatiana sufrió migrañas que la dejaban incapacitada. Hoy cuenta su sanidad."],
+["z61SxNey9sI", "Tumor desaparece sin cirugía", "", 120, 2025, "T", "enfermedad", "Wendy fue diagnosticada con un tumor en el ovario. Durante un servicio recibió su sanidad."],
+["xCDeJj2B77I", "De un melanoma a un milagro de sanidad", "", 143, 2025, "T", "enfermedad", "A Niyireth le diagnosticaron melanoma. En un servicio, Dios revirtió el diagnóstico."],
+["ksYSS41szGo", "Sanidad y salvación: la historia de Alexandra", "", 166, 2025, "T", "enfermedad", "Alexandra sufrió cuatro años una obstrucción del esófago. Recibió a Jesús y fue sanada."],
+["-qXH6R04e70", "Hanna: el milagro de vida que venció los diagnósticos", "", 136, 2025, "T", "enfermedad", "Los médicos dijeron que sus padres no podrían tener hijos. Dios tuvo la última palabra."],
+["8PySpmbuNwU", "Sanidad de cálculos en los riñones sin cirugía", "", 157, 2025, "T", "enfermedad", "Mauricio tenía ocho cálculos renales y una cirugía programada. Los cálculos desaparecieron."],
+["4IBet0UXcEI", "Angie: sanidad de leucemia en tiempo récord", "", 162, 2025, "T", "enfermedad", "Tras un procedimiento fallido, Angie quedó inmovilizada. En dos días Dios hizo un milagro."],
+["BXx02ikfRwI", "25 años con bastón: en un minuto Dios la levantó", "", 115, 2025, "T", "enfermedad", "Alba caminó 25 años con bastón. En un servicio, Dios la tocó y fue sanada."],
+["GpTtfZAQzik", "Alba: sana de cáncer por un milagro", "", 163, 2025, "T", "enfermedad", "Alba enfrentó un cáncer de seno y decidió creerle a Dios hasta recibir su milagro."],
+["XD8mGRNf3jU", "Satanás quiere desdibujar tu identidad", "Pastores Juan Sebastián y Ana María Rodríguez", 480, 2026, "", "jovenes soledad liberacion", "El enemigo ataca la identidad. Cápsula sobre quién eres en Cristo."],
+["efbX89-9i8Y", "¿Qué generación somos?", "Pastor Ricardo Rodríguez", 2040, 2023, "F", "jovenes", "Una pregunta a la nueva generación sobre su lugar en el plan de Dios."],
+["GDAKs-ygHwM", "Viene una nueva generación", "Pastor Ricardo Rodríguez", 2565, 2020, "F", "jovenes", "Una generación entrenada en el desierto, ungida y sin temor, que conocerá a Dios."],
+["k9khbNxCXss", "Una generación del Espíritu Santo", "Pastor Juan Sebastián Rodríguez", 3059, 2018, "F", "jovenes espiritu", "Tu identidad no es lo que dice el mundo: eres hijo del Rey y parte de una generación nacida del Espíritu."],
+["Fd6WuxwGDl4", "Una generación nacida del Espíritu Santo", "Pastor Juan Sebastián Rodríguez", 3472, 2019, "F", "jovenes espiritu", "Un llamado a los jóvenes a levantarse y reflejar la luz de Dios en su generación."],
+["Wt1r_MNJmAQ", "Generación de Hur y Aarón", "Pastor Juan Sebastián Rodríguez", 3630, 2017, "F", "jovenes", "Las grandes conquistas traen grandes batallas: no bajar la guardia y sostenerse unos a otros."],
+["71xBabrmtDY", "Generación Josué", "Pastor Ricardo Rodríguez", 2141, 2017, "F", "jovenes temor", "No temer a los gigantes: una nueva generación que vence de la mano del Señor."],
+["ThlvCY8sL4Q", "Millennials: ¿generación en decadencia?", "Pastores Juan Sebastián y Ana María Rodríguez", 2737, 2024, "P", "jovenes", "¿Generación de cristal? Conversación sobre los mitos y verdades de esta generación."],
+["TozDf5bTLBE", "¡Aviva el fuego que hay en ti!", "Pastor Ricardo Rodríguez", 2309, 2020, "F", "jovenes espiritu", "Volver a encender el don de Dios y mantenerlo vivo caminando cerca del Espíritu Santo."],
+["9VDpXkZh6fo", "Metamorfosis espiritual", "Pastor Ricardo Rodríguez", 2789, 2021, "F", "jovenes nuevos", "Escoger bien las amistades y dejarse transformar bajo una atmósfera ungida."],
+["lWBBrDDabLU", "Nacer de nuevo", "Pastores Juan Sebastián y Ana María Rodríguez", 250, 2020, "", "nuevos salvacion", "Un mensaje breve y cercano sobre lo que significa nacer de nuevo."],
+["T5utUykBmGU", "La Biblia", "Pastores Juan Sebastián y Ana María Rodríguez", 140, 2020, "", "nuevos", "Lo que nunca debes dejar de llevar contigo: la Palabra de Dios."],
+["OwOtzDzENoI", "Te es necesario nacer de nuevo", "Pastora Ma. Patricia Rodríguez", 3425, 2018, "F", "nuevos salvacion", "La eternidad espera, y no basta con llamarse cristiano: es necesario nacer de nuevo."],
+["B9VnvsxK-eI", "Solo seguirle", "Pastor Ricardo Rodríguez", 2928, 2022, "F", "nuevos", "Solo hay una cosa que debemos hacer: seguir a Jesús."],
+["tZTN5Y7ZBXc", "Uno que sepa caminar con Dios", "Pastor Ricardo Rodríguez", 2890, 2022, "F", "nuevos espiritu", "Proteger el fuego que Dios entregó y caminar con el Espíritu Santo cada día."],
+["CLzq7awzWEc", "Caminando con Dios", "Pastor Ricardo Rodríguez", 2686, 2019, "F", "nuevos prueba", "Qué impide caminar con el Señor y cómo atravesar los desiertos con Él."],
+["ngopnO3s01E", "¿En qué está fundada tu fe?", "Pastora Ma. Patricia Rodríguez", 145, 2024, "", "nuevos esperanza", "Que la fe no se apoye en la sabiduría del mundo sino en el poder de Dios."],
+["AufKboDaaAw", "Día de la Biblia", "Pastora Ma. Patricia Rodríguez", 187, 2024, "", "nuevos", "Bienaventurado el que teme a Jehová y se deleita en sus mandamientos."],
+["7XnpHcIIu1Y", "Como la primera vez", "Pastora Ana María Rodríguez", 3055, 2020, "F", "nuevos salvacion", "No dejar que se apague el primer amor: perseverar y rendirse cada día a sus pies."],
+["LFOTURa-E7U", "La respuesta de Dios: el Espíritu Santo", "Pastor Ricardo Rodríguez", 2292, 2024, "F", "espiritu prueba", "Ante cualquier circunstancia, el Espíritu Santo es la respuesta."],
+["Sx8TY5hNY5k", "Bautizados con el Espíritu", "Pastor Ricardo Rodríguez", 2967, 2026, "F", "espiritu nuevos", "Prédica sobre el bautismo con el Espíritu Santo."],
+["P2giTOvrVfk", "Viviendo en el Espíritu", "Pastor Ricardo Rodríguez", 2379, 2025, "F", "espiritu", "Las dos llaves para vivir en el mundo del Espíritu."],
+["zvjxOEhjuxY", "Guiados por su Espíritu", "Pastor Ricardo Rodríguez", 2063, 2024, "F", "espiritu nuevos", "Atender la voz de Dios y dejarse guiar por el Espíritu Santo."],
+["R1GflEKRYXY", "Cuando el Espíritu Santo venga", "Pastor Ricardo Rodríguez", 3230, 2021, "F", "espiritu", "El Espíritu Santo convence al mundo de pecado, de justicia y de juicio."],
+["1ai0tgBDJ9A", "No apaguéis al Espíritu", "Pastor Ricardo Rodríguez", 3211, 2023, "F", "espiritu", "La unción que hay en el creyente y el llamado a no apagar el fuego."],
+["T8cdC3QGJSI", "Escucha la voz del Espíritu", "Pastor Ricardo Rodríguez", 3156, 2021, "F", "espiritu", "Volver a los orígenes de la iglesia, fortalecidos y guiados por el Espíritu Santo."],
+["Rkhvbhc8tr0", "El ruido del mundo, el susurro del Espíritu", "Pastor Ricardo Rodríguez", 2747, 2022, "F", "espiritu ansiedad", "El Espíritu Santo habla, pero los afanes del mundo apagan su voz."],
+["IebIXY_w45E", "Espíritu Santo, abre mis ojos", "Pastor Juan Sebastián Rodríguez", 3796, 2024, "F", "espiritu", "El Señor revela cosas nuevas bajo la unción del Espíritu."],
+["XO69ER4GZnI", "Desesperados por ti, Espíritu Santo", "Pastores Juan Sebastián y Ana María Rodríguez", 3631, 2026, "F", "espiritu jovenes", "Que el Espíritu Santo sea lo más importante en la vida y todo lo demás pase a segundo plano."],
+["z9p0lG3FGwU", "El Espíritu en tiempos de crisis", "Pastor Juan Sebastián Rodríguez", 2978, 2023, "F", "espiritu prueba", "El Espíritu de consolación en la crisis: Él tiene cuidado de ti."],
+["wJvGFf72nFw", "Transformados por su Espíritu", "Pastor Ricardo Rodríguez", 1727, 2023, "F", "espiritu nuevos", "¿Quién está influenciando tu vida? Es tiempo de ser transformados por su Espíritu."],
+["UcnoVXkNK4A", "Una iglesia llena del Espíritu Santo", "Pastor Ricardo Rodríguez", 3058, 2021, "F", "espiritu", "En tiempos difíciles, pedir la unción para hacer la obra a la que Dios llama."]
 ].map(a=>({id:a[0],t:a[1],who:a[2],s:a[3],y:a[4],ty:a[5],c:a[6].split(" "),d:a[7]}));
 
 const $=s=>document.querySelector(s);
@@ -353,7 +438,18 @@ const CI={
  familia:S('<path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-5h4v5"/>'),
  perdon:S('<path d="M10 14a4 4 0 0 1 0-5.6l2.5-2.5a4 4 0 0 1 5.6 5.6L17 12.6"/><path d="M14 10a4 4 0 0 1 0 5.6l-2.5 2.5a4 4 0 0 1-5.6-5.6L7 11.4"/>'),
  esperanza:S('<path d="M3 18h18M6 18a6 6 0 0 1 12 0"/><path d="M12 6V3M5.6 9.6 3.5 7.5M18.4 9.6l2.1-2.1"/>'),
- salvacion:S('<path d="M12 3v18M7 8h10"/>')};
+ salvacion:S('<path d="M12 3v18M7 8h10"/>'),
+ temor:S('<path d="M12 3 4 6v6c0 4.5 3.4 8.2 8 9 4.6-.8 8-4.5 8-9V6z"/>'),
+ depresion:S('<path d="M4 15a8 8 0 0 0 16 0"/><path d="M12 3v7M8.5 6.5 12 10l3.5-3.5"/>'),
+ matrimonio:S('<circle cx="9" cy="13" r="5"/><circle cx="15" cy="13" r="5"/>'),
+ hijos:S('<circle cx="9" cy="7" r="2.5"/><circle cx="16.5" cy="9.5" r="2"/><path d="M4.5 20a4.5 4.5 0 0 1 9 0M13.5 20a3 3 0 0 1 6 0"/>'),
+ liberacion:S('<path d="M7 11V8a5 5 0 0 1 9.6-2"/><rect x="4" y="11" width="16" height="10" rx="2.5"/><path d="M12 15v2"/>'),
+ necesidad:S('<path d="M12 21c-4-2-7-5-7-9a7 7 0 0 1 14 0c0 4-3 7-7 9z"/><path d="M12 8v6M9 11h6"/>'),
+ mujer:S('<circle cx="12" cy="8" r="4.5"/><path d="M12 12.5V21M9 18h6"/>'),
+ oracion:S('<path d="M12 3c-1 2-4 6-4 10v6h8v-6c0-4-3-8-4-10z"/><path d="M12 9v10"/>'),
+ jovenes:S('<path d="M13 2 4 14h7l-1 8 9-12h-7z"/>'),
+ nuevos:S('<path d="M12 21V11"/><path d="M12 11c0-4 3-6 7-6 0 4-3 6-7 6zM12 14c0-3-2.5-5-6-5 0 3 2.5 5 6 5z"/>'),
+ espiritu:S('<path d="M3 12c3-1 5-4 6-7 1 3 3 5 6 5l6-3-3 6c0 4-3 7-8 7-3 0-5-2-5-4z"/>')};
 const ICON={play:'<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>',
 share:S('<path d="M20.5 11.5a8.5 8.5 0 0 1-12.6 7.4L3.5 20l1.2-4.2a8.5 8.5 0 1 1 15.8-4.3z"/>'),
 copy:S('<rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/>')};
@@ -373,33 +469,46 @@ function card(v){
   <a class="btn" href="https://wa.me/?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener">${ICON.share}WhatsApp</a>
   <button class="btn icon" type="button" data-copy="${url(v)}" aria-label="Copiar enlace" title="Copiar enlace">${ICON.copy}</button></div></article>`;
 }
+const catOf=Object.fromEntries(CATS.map(c=>[c.k,c]));
+V.forEach(v=>{v.h=norm([v.t,v.d,v.who,...v.c.map(k=>catOf[k]?catOf[k].t+" "+catOf[k].s+" "+catOf[k].w:"")].join(" "));v.words=v.h.split(/[^a-z0-9ñ]+/).filter(Boolean)});
+function hit(v,tok){if(v.h.includes(tok))return true;if(tok.length<5)return false;return v.words.some(w=>{if(w.length<tok.length)return false;const p=w.slice(0,tok.length);let d=0;for(let i=0;i<p.length;i++)if(p[i]!==tok[i]&&++d>1)return false;return d<=1})}
 function filtered(list){
-  const q=norm($("#search").value.trim());
-  return list.filter(v=>(mode!=="short"||v.s<900)&&(mode!=="test"||v.ty==="T")&&(mode!=="full"||isFull(v))&&(!q||norm(v.t+" "+v.d+" "+v.who).includes(q)));
+  const toks=norm($("#search").value.trim()).split(/\s+/).filter(t=>t.length>1&&!["de","la","el","los","las","en","y","un","una","que","por","para","mi","me","con"].includes(t));
+  return list.filter(v=>(mode!=="short"||v.s<900)&&(mode!=="test"||v.ty==="T")&&(mode!=="full"||isFull(v))&&toks.every(t=>hit(v,t)));
 }
 function render(){
   tiles();
   document.querySelectorAll(".seg button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.f===mode));
-  const out=$("#results");
-  const cats=cur?CATS.filter(c=>c.k===cur):CATS;
+  const out=$("#results"), q=$("#search").value.trim();
+  $("#situaciones").hidden=!!q;
   let html="",total=0;
-  if(cur) html+=`<button class="back glass" type="button" id="back">← Todos los temas</button>`;
-  for(const c of cats){
-    const list=filtered(V.filter(v=>v.c.includes(c.k))).sort((a,b)=>isFull(a)-isFull(b)||(a.ty==="T")-(b.ty==="T")||a.s-b.s);
-    if(!list.length) continue; total+=list.length;
-    html+=`<section class="cat" id="sec-${c.k}"><div class="cat-head glass"><div><h2>${c.t}</h2><div class="n">${c.s} · ${list.length} ${list.length===1?"mensaje":"mensajes"}</div></div><div><q>${c.v}</q><span class="ref">${c.r}</span></div></div><div class="grid">${list.map(card).join("")}</div></section>`;
+  if(q){
+    const list=filtered(V).sort((a,b)=>isFull(a)-isFull(b)||(a.ty==="T")-(b.ty==="T")||a.s-b.s);
+    total=list.length;
+    html+=`<section class="cat" id="sec-buscar"><div class="cat-head glass"><div><h2>Resultados</h2><div class="n">${total} ${total===1?"mensaje":"mensajes"} para «${q.replace(/[<>&]/g,"")}»</div></div><div><button class="back glass" type="button" id="clear">Borrar búsqueda</button></div></div>${total?`<div class="grid">${list.map(card).join("")}</div>`:""}</section>`;
+    if(!total) html+=`<p class="empty glass">No encontramos mensajes con esa palabra. Prueba con otra, como paz, hijos, sanidad o perdón, o escoge una situación.</p>`;
+  } else {
+    const cats=cur?CATS.filter(c=>c.k===cur):CATS;
+    if(cur) html+=`<button class="back glass" type="button" id="back">← Todos los temas</button>`;
+    for(const c of cats){
+      const list=filtered(V.filter(v=>v.c.includes(c.k))).sort((a,b)=>isFull(a)-isFull(b)||(a.ty==="T")-(b.ty==="T")||a.s-b.s);
+      if(!list.length) continue; total+=list.length;
+      html+=`<section class="cat" id="sec-${c.k}"><div class="cat-head glass"><div><h2>${c.t}</h2><div class="n">${c.s} · ${list.length} ${list.length===1?"mensaje":"mensajes"}</div></div><div><q>${c.v}</q><span class="ref">${c.r}</span></div></div><div class="grid">${list.map(card).join("")}</div></section>`;
+    }
+    if(!total) html+=`<p class="empty glass">No hay mensajes con este filtro. Cambia el filtro para ver más.</p>`;
   }
-  if(!total) html+=`<p class="empty glass">No hay mensajes con esa búsqueda. Prueba con otra palabra o cambia el filtro.</p>`;
   out.innerHTML=html;
   const bk=$("#back"); if(bk) bk.onclick=()=>{location.hash=""};
+  const cl=$("#clear"); if(cl) cl.onclick=()=>{$("#search").value="";render()};
   out.querySelectorAll("[data-copy]").forEach(b=>b.onclick=()=>copy(b.dataset.copy));
 }
 function toast(t){const e=$("#toast");e.textContent=t;e.hidden=false;clearTimeout(toast.h);toast.h=setTimeout(()=>e.hidden=true,1800)}
 function copy(t){try{navigator.clipboard.writeText(t).then(()=>toast("Enlace copiado")).catch(()=>fallback(t))}catch(e){fallback(t)}}
 function fallback(t){const i=document.createElement("input");i.value=t;document.body.appendChild(i);i.select();try{document.execCommand("copy");toast("Enlace copiado")}catch(e){toast("Selecciona y copia: "+t)}i.remove()}
 function route(){const h=location.hash.slice(1);cur=CATS.some(c=>c.k===h)?h:"";render();if(cur)$("#results").scrollIntoView({block:"start"})}
-$("#st-n").textContent=V.length; $("#st-s").textContent=V.filter(isFull).length;
-$("#search").addEventListener("input",render);
+$("#st-n").textContent=V.length; $("#st-c").textContent=CATS.length; $("#st-s").textContent=V.filter(isFull).length;
+let st;$("#search").addEventListener("input",()=>{clearTimeout(st);st=setTimeout(()=>{render();if($("#search").value.trim())$("#results").scrollIntoView({block:"start"})},250)});
+$("#search").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();render();$("#results").scrollIntoView({block:"start"})}});
 document.querySelectorAll(".seg button").forEach(b=>b.onclick=()=>{mode=b.dataset.f;render()});
 window.addEventListener("hashchange",route);
 route();
